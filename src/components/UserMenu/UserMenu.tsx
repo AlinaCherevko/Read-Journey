@@ -1,7 +1,20 @@
 import { FC } from "react";
 import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { logOut } from "../../redux/auth/authOperations";
+import { toast } from "react-toastify";
+import { selectIsAuth } from "../../redux/auth/authSelectors";
 
 const UserMenu: FC = () => {
+  const isAuth = useSelector(selectIsAuth);
+  const dispatch: AppDispatch = useDispatch();
+  console.log(isAuth);
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    toast.success("User logged out");
+  };
   return (
     <div className="flex gap-4 items-center ">
       <div className="flex items-center gap-2">
@@ -13,7 +26,7 @@ const UserMenu: FC = () => {
         </span>
       </div>
       <div className="hidden tablet:flex">
-        <Button type="button" text="Log out" />
+        <Button type="button" text="Log out" onClick={handleLogout} />
       </div>
     </div>
   );

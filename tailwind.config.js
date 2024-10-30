@@ -4,27 +4,18 @@ export default {
   theme: {
     extend: {
       screens: {
-        mobile: { min: "320px", max: "374.98px" },
-        mobileAdaptive: "375px",
+        mobileAdaptive: { min: "375px" },
         tablet: "768px",
         desktop: "1440px",
-
-        // Опціональні класи для більш специфічних умов
-        mobileOnly: { max: "767.98px" },
-        tabletOnly: { min: "768px", max: "1439.98px" },
-        desktopOnly: { min: "1440px" },
-      },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "1.25rem",
-          sm: "1.25rem",
-          md: "2rem",
-          xl: "2rem",
-        },
       },
       padding: {
         42: "10.5rem",
+        53.5: " 13.375rem",
+      },
+      margin: {
+        18: "4.5rem",
+        27: "6.75rem",
+        36.5: "9.125rem",
       },
       colors: {
         "primary-white": "#f9f9f9",
@@ -34,6 +25,12 @@ export default {
         "gray-bg-color": "#1F1F1F",
         "light-bg-color": "#262626",
         "dark-text-color": "rgba(227, 227, 227, 0.5)",
+        "red-error-color": "#E90516",
+        "green-success-color": "#30B94D",
+      },
+      backgroundImage: {
+        iphoneMob: "url('/public/images/iphone-mob-1x.png')",
+        iphoneDesktop: "url('/public/images/iphone-desktop-1x.png')",
       },
       fontFamily: {
         gilroy: ["Gilroy", "sans-serif"],

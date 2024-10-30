@@ -1,5 +1,5 @@
 import { FC } from "react";
-import FilterInput from "../FilterInput/FilterInput";
+import Input from "../FilterInput/FilterInput";
 import Button from "../Button/Button";
 
 const Dashboard: FC = () => {
@@ -9,8 +9,8 @@ const Dashboard: FC = () => {
         Filters:
       </span>
       <div className="flex flex-col gap-2 mb-5">
-        <FilterInput placeholder="Enter text" text="Book title:" />
-        <FilterInput placeholder="Enter text" text="The author:" />
+        <Input placeholder="Enter text" text="Book title:" />
+        <Input placeholder="Enter text" text="The author:" />
       </div>
       <Button text="To apply" type="submit" />
     </div>
