@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios1, { AxiosError } from "axios";
-import { RootState } from "../store";
+import { RootState, store } from "../store";
 import {
   ISignUpData,
   ISignUpRes,
@@ -19,6 +19,20 @@ export const setAuthHeader = (token: string) => {
 export const clearAuthHeader = () => {
   axios.defaults.headers.common["Authorization"] = "";
 };
+
+// axios.interceptors.request.use(
+//   function (config) {
+//     const token = store.getState().auth.token;
+//     console.log(token);
+
+//     // Зробіть що-небудь перед надсиланням запиту
+//     return config;
+//   },
+//   function (error) {
+//     // Зробіть щось із помилкою запиту
+//     return Promise.reject(error);
+//   }
+// );
 
 //signup
 export const signup = createAsyncThunk<
@@ -88,6 +102,7 @@ export const getCurrentUser = createAsyncThunk<
   try {
     setAuthHeader(persistedToken);
     const { data } = await axios.get("/users/current");
+    console.log(data);
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -104,12 +119,12 @@ export const refreshCurrentUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/refresh", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState;
-  const persistedToken = state.auth.token;
-  if (persistedToken === null) {
+  const persistedRefreshToken = state.auth.refreshToken;
+  if (!persistedRefreshToken) {
     return thunkAPI.rejectWithValue("Failed to fetch user");
   }
   try {
-    setAuthHeader(persistedToken);
+    setAuthHeader(persistedRefreshToken);
     const { data } = await axios.get("/users/current/refresh");
     return data;
   } catch (error: unknown) {

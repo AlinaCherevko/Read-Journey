@@ -1,22 +1,41 @@
 import { Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import MainLayout from "./components/MainLayout/MainLayout";
 import Loader from "./components/Loader/Loader";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-//import { selectIsAuth } from "./redux/auth/authSelectors";
-//import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "./redux/store";
+import {
+  getCurrentUser,
+  refreshCurrentUser,
+} from "./redux/auth/authOperations";
+import { selectRefreshing, selectToken } from "./redux/auth/authSelectors";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const Library = lazy(() => import("./pages/Library/Library"));
-const Recommended = lazy(() => import("./pages/Recommended/Recommended"));
+//const Recommended = lazy(() => import("./pages/Recommended/Recommended"));
 const Reading = lazy(() => import("./pages/Reading/Reading"));
 
 function App() {
+  const dispatch: AppDispatch = useDispatch();
+  const isRefreshing = useSelector(selectRefreshing);
+  const token = useSelector(selectToken);
   //const isAuth = useSelector(selectIsAuth);
-  return (
+
+  useEffect(() => {
+    if (!token) dispatch(refreshCurrentUser());
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
@@ -28,14 +47,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/recommended"
-            element={
-              <PrivateRoute>
-                <Recommended />
-              </PrivateRoute>
-            }
-          />
+
           <Route
             path="/library"
             element={

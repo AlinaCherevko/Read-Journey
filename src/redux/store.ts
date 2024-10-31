@@ -11,15 +11,17 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
+import { booksReducer } from "./books/booksSlice";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user", "token"],
+  whitelist: ["user", "token", "refreshToken"],
 };
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
+  books: booksReducer,
 });
 
 export const store = configureStore({
