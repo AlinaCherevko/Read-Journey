@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios1, { AxiosError } from "axios";
-import { RootState, store } from "../store";
+import { RootState } from "../store";
 import {
   ISignUpData,
   ISignUpRes,
@@ -23,12 +23,7 @@ export const setAuthHeader = (token: string) => {
 
 // axios.interceptors.request.use(
 //   function (config) {
-//     const token = store.getState().auth.token;
-//     console.log(token);
-//     if (token) {
-//       setAuthHeader(token);
-//     }
-
+//
 //     // Зробіть що-небудь перед надсиланням запиту
 //     return config;
 //   },
