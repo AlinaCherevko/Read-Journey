@@ -59,7 +59,7 @@ img {
 button {
   @apply cursor-pointer;
 }
-.container1 {
+.wrapper {
   @apply w-full mx-auto px-5 tablet:px-8 mobileAdaptive:w-[375px] tablet:w-[768px] desktop:w-[1280px];
 }
 a.active {

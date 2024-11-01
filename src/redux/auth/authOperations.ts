@@ -14,9 +14,10 @@ export const axios = axios1.create({
 });
 
 export const setAuthHeader = (token: string) => {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-};
-export const clearAuthHeader = () => {
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return;
+  }
   axios.defaults.headers.common["Authorization"] = "";
 };
 
@@ -24,6 +25,9 @@ export const clearAuthHeader = () => {
 //   function (config) {
 //     const token = store.getState().auth.token;
 //     console.log(token);
+//     if (token) {
+//       setAuthHeader(token);
+//     }
 
 //     // Зробіть що-небудь перед надсиланням запиту
 //     return config;
@@ -79,7 +83,7 @@ export const logOut = createAsyncThunk<
 >("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/signout");
-    clearAuthHeader();
+    //setAuthHeader();
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
       const errorMessage = error.response.data.message;

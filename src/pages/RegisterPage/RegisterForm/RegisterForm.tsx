@@ -37,7 +37,7 @@ const RegisterForm: FC = () => {
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(schemaReg),
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {

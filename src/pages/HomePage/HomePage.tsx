@@ -11,6 +11,9 @@ const HomePage: FC = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
 
+  console.log(title);
+  console.log(author);
+
   const dispatch: AppDispatch = useDispatch();
   const recommended = useSelector(selectRecommendedBooks);
 
@@ -21,10 +24,19 @@ const HomePage: FC = () => {
   }, [dispatch, page, author, title]);
   return (
     <section>
-      <div className="container1">
+      <div className="wrapper">
         <div className="mt-3 desktop:mt-4 flex flex-col gap-2.5 tablet:gap-4 desktop:flex-row">
-          <Dashboard />
-          <RecommendedBooks />
+          <Dashboard
+            setTitle={setTitle}
+            setAuthor={setAuthor}
+            setPage={setPage}
+          />
+          <RecommendedBooks
+            setPage={setPage}
+            page={page}
+            title={title}
+            author={author}
+          />
         </div>
       </div>
     </section>

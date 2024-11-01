@@ -1,4 +1,3 @@
-// import { FC } from "react";
 import { FieldValues } from "react-hook-form";
 import { InputProps } from "../FilterInput/types";
 
@@ -35,4 +34,3 @@ const FormInput = <T extends FieldValues>({
 };
 
 export default FormInput;
-//   {...(label && register ? register(label) : {})}

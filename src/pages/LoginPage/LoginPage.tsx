@@ -6,7 +6,7 @@ import BgImage from "./BgImage/BgImage";
 const LoginPage: FC = () => {
   return (
     <section>
-      <div className="container1">
+      <div className="wrapper">
         <div className="flex flex-col gap-2.5 desktop:flex-row desktop:gap-4 ">
           <div className="bg-gray-bg-color rounded-lg p-5 pb-10 tablet:pb-53.5 tablet:pt-10 tablet:pl-16 mt-5 tablet:pr-42 desktop:pr-16 desktop:w-[600px] desktop:pb-10 desktop:mt-8">
             <Logo />

@@ -18,6 +18,8 @@ const LoginForm: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  console.log(user);
+
   useEffect(() => {
     if (!isFirstRender) {
       if (user) {
@@ -37,7 +39,7 @@ const LoginForm: FC = () => {
     reset,
   } = useForm<LoginValues>({
     resolver: yupResolver(schemaLog),
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
