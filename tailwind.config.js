@@ -43,6 +43,7 @@ export default {
         tiny: ["10px", "1.2"],
         lightSmall: ["12px", "1.33"],
         small: ["14px", "1.25"],
+        mediumSmall: ["18px", "1"],
         medium: ["16px", "1.125"],
         lightMedium: ["20px", "1"],
         lightLarge: ["28px", "1.14"],

@@ -16,7 +16,7 @@ import { booksReducer } from "./books/booksSlice";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user", "token", "refreshToken"],
+  whitelist: ["user"],
 };
 
 const rootReducer = combineReducers({

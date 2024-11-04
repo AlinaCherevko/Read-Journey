@@ -25,7 +25,7 @@ const RecommendedBooks: FC<RecBooksProps> = ({
 
   console.log(results);
   return (
-    <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px]">
+    <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
       <div className="flex mb-8 justify-between">
         <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
           Recommended

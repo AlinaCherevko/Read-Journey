@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { logOut } from "../../redux/auth/authOperations";
 import { toast } from "react-toastify";
-import { selectIsAuth } from "../../redux/auth/authSelectors";
+import { selectUser } from "../../redux/auth/authSelectors";
 
 const UserMenu: FC = () => {
-  const isAuth = useSelector(selectIsAuth);
   const dispatch: AppDispatch = useDispatch();
-  console.log(isAuth);
+  const user = useSelector(selectUser);
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -19,10 +18,10 @@ const UserMenu: FC = () => {
     <div className="flex gap-4 items-center ">
       <div className="flex items-center gap-2">
         <div className="w-9 h-9 flex items-center justify-center text-primary-white text-medium bg-transparent rounded-full border border-main-border-color tablet:w-10 tablet:h-10">
-          U
+          {user.name.slice(0, 1).toUpperCase()}
         </div>
         <span className=" hidden desktop:flex text-primary-white text-medium">
-          User name
+          {user.name}
         </span>
       </div>
       <div className="hidden tablet:flex">

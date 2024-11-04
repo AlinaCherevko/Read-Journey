@@ -25,7 +25,7 @@ const HomePage: FC = () => {
   return (
     <section>
       <div className="wrapper">
-        <div className="mt-3 desktop:mt-4 flex flex-col gap-2.5 tablet:gap-4 desktop:flex-row">
+        <div className="mt-3 desktop:mt-4 flex flex-col gap-2.5 tablet:gap-4 desktop:flex-row pb-5">
           <Dashboard
             setTitle={setTitle}
             setAuthor={setAuthor}
