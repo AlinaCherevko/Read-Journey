@@ -16,12 +16,18 @@ import { booksReducer } from "./books/booksSlice";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "token", "refreshToken"],
+};
+
+const booksPersistConfig = {
+  key: "books",
+  storage,
+  whitelist: ["inLibrary"],
 };
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  books: booksReducer,
+  books: persistReducer(booksPersistConfig, booksReducer),
 });
 
 export const store = configureStore({

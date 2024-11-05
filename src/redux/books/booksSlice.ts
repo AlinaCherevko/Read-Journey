@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getRecommendedBooks } from "./booksOperations";
+import { addToLibrary, getRecommendedBooks } from "./booksOperations";
 import { IBooksState } from "./types";
 
 const initialState: IBooksState = {
@@ -8,6 +8,7 @@ const initialState: IBooksState = {
     results: [],
     totalPages: 0,
   },
+  inLibrary: [],
   isError: false,
   isLoading: false,
 };
@@ -35,6 +36,14 @@ export const booksSlice = createSlice({
       console.log(payload);
       state.recommended.results = payload.results;
       state.recommended.totalPages = payload.totalPages;
+      state.isError = false;
+      state.isLoading = false;
+    });
+    //addBookToLibrary
+    builder.addCase(addToLibrary.pending, isPending);
+    builder.addCase(addToLibrary.rejected, isRejected);
+    builder.addCase(addToLibrary.fulfilled, (state, { payload }) => {
+      state.inLibrary.push(payload);
       state.isError = false;
       state.isLoading = false;
     });

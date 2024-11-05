@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios1, { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { RootState } from "../store";
 import {
   ISignUpData,
@@ -9,29 +9,17 @@ import {
   IRefreshRes,
 } from "./types";
 
-export const axios = axios1.create({
+export const instance = axios.create({
   baseURL: "https://readjourney.b.goit.study/api",
 });
 
-export const setAuthHeader = (token: string) => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    return;
-  }
-  axios.defaults.headers.common["Authorization"] = "";
-};
-
-// axios.interceptors.request.use(
-//   function (config) {
-//
-//     // Зробіть що-небудь перед надсиланням запиту
-//     return config;
-//   },
-//   function (error) {
-//     // Зробіть щось із помилкою запиту
-//     return Promise.reject(error);
+// export const setAuthHeader = (token: string) => {
+//   if (token) {
+//     instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//     return;
 //   }
-// );
+//   instance.defaults.headers.common["Authorization"] = "";
+// };
 
 //signup
 export const signup = createAsyncThunk<
@@ -40,8 +28,8 @@ export const signup = createAsyncThunk<
   { rejectValue: string }
 >("auth/register", async (credentials, thunkAPI) => {
   try {
-    const { data } = await axios.post("/users/signup", credentials);
-    setAuthHeader(data.token);
+    const { data } = await instance.post("/users/signup", credentials);
+    // setAuthHeader(data.token);
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -58,8 +46,8 @@ export const logIn = createAsyncThunk<
   { rejectValue: string }
 >("auth/signin", async (credentials, thunkAPI) => {
   try {
-    const { data } = await axios.post("/users/signin", credentials);
-    setAuthHeader(data.token);
+    const { data } = await instance.post("/users/signin", credentials);
+    //setAuthHeader(data.token);
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -77,7 +65,7 @@ export const logOut = createAsyncThunk<
   { rejectValue: string }
 >("auth/logout", async (_, thunkAPI) => {
   try {
-    await axios.post("/users/signout");
+    await instance.post("/users/signout");
     //setAuthHeader();
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -99,8 +87,8 @@ export const getCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue("Failed to fetch user");
   }
   try {
-    setAuthHeader(persistedToken);
-    const { data } = await axios.get("/users/current");
+    //setAuthHeader(persistedToken);
+    const { data } = await instance.get("/users/current");
     console.log(data);
     return data;
   } catch (error: unknown) {
@@ -119,12 +107,13 @@ export const refreshCurrentUser = createAsyncThunk<
 >("auth/refresh", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState;
   const persistedRefreshToken = state.auth.refreshToken;
-  if (!persistedRefreshToken) {
-    return thunkAPI.rejectWithValue("Failed to fetch user");
-  }
+  console.log(persistedRefreshToken);
   try {
-    setAuthHeader(persistedRefreshToken);
-    const { data } = await axios.get("/users/current/refresh");
+    const { data } = await instance.get("/users/current/refresh", {
+      headers: {
+        Authorization: `Bearer ${persistedRefreshToken}`,
+      },
+    });
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {

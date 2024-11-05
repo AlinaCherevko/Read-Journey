@@ -58,10 +58,21 @@ img {
 
 button {
   @apply cursor-pointer;
+  width: fit-content;
 }
 .wrapper {
   @apply w-full mx-auto px-5 tablet:px-8 mobileAdaptive:w-[375px] tablet:w-[768px] desktop:w-[1280px];
 }
 a.active {
   @apply text-primary-white;
+}
+.backdrop {
+  position: fixed;
+  inset: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(38, 38, 38, 0.5);
+  z-index: 1200;
+  overflow: auto;
 }

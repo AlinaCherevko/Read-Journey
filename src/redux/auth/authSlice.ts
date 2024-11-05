@@ -4,8 +4,8 @@ import {
   logIn,
   logOut,
   getCurrentUser,
-  refreshCurrentUser,
   signup,
+  refreshCurrentUser,
 } from "./authOperations";
 import { IState } from "./types";
 
@@ -36,7 +36,16 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
 
-  reducers: {},
+  reducers: {
+    // updatesToken(
+    //   state,
+    //   action: PayloadAction<{ token: string; refreshToken: string }>
+    // ) {
+    //   console.log(action.payload);
+    //   state.token = action.payload.token;
+    //   state.refreshToken = action.payload.refreshToken;
+    // },
+  },
   extraReducers(builder) {
     //register
     builder.addCase(signup.pending, handleAuthPending);
@@ -73,18 +82,6 @@ export const authSlice = createSlice({
       state.isAuthLoading = initialState.isAuthLoading;
       state.error = initialState.error;
     });
-
-    //refresh
-    builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
-      state.token = payload.token;
-      state.refreshToken = payload.refreshToken;
-      state.isLoggedIn = true;
-      state.error = "";
-    });
-    builder.addCase(refreshCurrentUser.rejected, (state, { payload }) => {
-      state.error = payload;
-    });
-
     //current
     builder.addCase(getCurrentUser.pending, (state) => {
       state.isRefreshing = true;
@@ -103,7 +100,18 @@ export const authSlice = createSlice({
       state.isRefreshing = false;
       state.error = payload;
     });
+
+    //refresh
+    builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken;
+      state.isLoggedIn = true;
+      state.error = "";
+    });
+    builder.addCase(refreshCurrentUser.rejected, (state, { payload }) => {
+      state.error = payload;
+    });
   },
 });
-
+//export const { updatesToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -1,5 +1,6 @@
-import { IBook } from "../../../redux/books/types";
+import { IBook, IBookLibrary } from "../../../redux/books/types";
 
 export type BooksListProps = {
-  results: IBook[];
+  results: IBook[] | IBookLibrary[];
+  isHomePage?: boolean;
 };

@@ -1,23 +1,22 @@
 import { FC, useEffect, useState } from "react";
 import Dashboard from "../../components/Dashboard/Dashboard";
-import RecommendedBooks from "./RecommendedBooks/RecommendedBooks";
 import { AppDispatch } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecommendedBooks } from "../../redux/books/booksOperations";
+import BooksSection from "./RecommendedBooks/RecommendedBooks";
 import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
 
 const HomePage: FC = () => {
+  const { results } = useSelector(selectRecommendedBooks);
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const isHomePage = true;
 
   console.log(title);
   console.log(author);
 
   const dispatch: AppDispatch = useDispatch();
-  const recommended = useSelector(selectRecommendedBooks);
-
-  console.log(recommended);
 
   useEffect(() => {
     dispatch(getRecommendedBooks({ page, title, author }));
@@ -31,11 +30,12 @@ const HomePage: FC = () => {
             setAuthor={setAuthor}
             setPage={setPage}
           />
-          <RecommendedBooks
+          <BooksSection
             setPage={setPage}
             page={page}
-            title={title}
-            author={author}
+            items={results}
+            title="Recommended books"
+            isHomePage={isHomePage}
           />
         </div>
       </div>

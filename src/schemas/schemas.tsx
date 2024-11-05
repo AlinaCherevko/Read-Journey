@@ -41,3 +41,11 @@ export const schemaLog = yup
       .required("Password is required"),
   })
   .required();
+
+export const schemaAddBook = yup
+  .object({
+    title: yup.string().required("Title is required"),
+    author: yup.string().required("Author is required"),
+    pages: yup.string().required("Pages are required"),
+  })
+  .required();
