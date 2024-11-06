@@ -7,7 +7,7 @@ const Navigation: FC = () => {
     <nav className="hidden tablet:flex gap-x-10 ">
       <NavTab to="/" text="Home" />
       <NavTab to="/library" text="My library" />
-      <NavTab to="/reading" text="My training" />
+      <NavTab to="/reading" text="My reading" />
     </nav>
   );
 };

@@ -8,7 +8,7 @@ import Icon from "../../../components/Icon/Icon";
 import { AppDispatch } from "../../../redux/store";
 import { deleteFromLibrary } from "../../../redux/books/booksOperations";
 
-const BooksItem: FC<BookProps> = ({ result, isHomePage }) => {
+const BooksItem: FC<BookProps> = ({ result, pageName }) => {
   const [isInLibrary, setIsInLibrary] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
   const inLibrary = useSelector(selectLibrariesBooks);
@@ -42,7 +42,7 @@ const BooksItem: FC<BookProps> = ({ result, isHomePage }) => {
             </h3>
             <p className="text-tiny">{result.author}</p>
           </div>
-          {isInLibrary && !isHomePage && (
+          {isInLibrary && pageName === "library" && (
             <div
               onClick={handleDeleteFromLibrary}
               className="cursor-pointer flex items-center justify-center w-7 h-7 rounded-full border border-red-bg-transparent hover:bg-red-bg-transparent"
@@ -63,7 +63,7 @@ const BooksItem: FC<BookProps> = ({ result, isHomePage }) => {
           <InfoModal
             result={result}
             isInLibrary={isInLibrary}
-            isHomePage={isHomePage}
+            pageName={pageName}
           />
         </Modal>
       )}

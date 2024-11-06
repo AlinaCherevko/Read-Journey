@@ -53,3 +53,13 @@ export const schemaAddBook = yup
       .required("Pages are required"),
   })
   .required();
+
+export const schemaReadingBook = yup
+  .object({
+    pages: yup
+      .number()
+      .typeError("Pages must be a number")
+      .transform((value, originalValue) => (originalValue === null ? 0 : value))
+      .required("Pages are required"),
+  })
+  .required();

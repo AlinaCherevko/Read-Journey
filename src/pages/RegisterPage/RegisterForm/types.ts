@@ -10,3 +10,7 @@ export type AddBookValues = {
   author: string;
   pages: number;
 };
+
+export type ReadBookValues = {
+  pages: number;
+};

@@ -9,7 +9,7 @@ const HomePage: FC = () => {
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const isHomePage = true;
+  const pageName = "home";
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const HomePage: FC = () => {
             setPage={setPage}
             page={page}
             title="Recommended books"
-            isHomePage={isHomePage}
+            pageName={pageName}
           />
         </div>
       </div>

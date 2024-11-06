@@ -19,15 +19,15 @@ const authPersistConfig = {
   whitelist: ["user", "token", "refreshToken"],
 };
 
-const booksPersistConfig = {
-  key: "books",
-  storage,
-  whitelist: ["inLibrary"],
-};
+// const booksPersistConfig = {
+//   key: "books",
+//   storage,
+//   whitelist: ["inLibrary"],
+// };
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  books: persistReducer(booksPersistConfig, booksReducer),
+  books: booksReducer,
 });
 
 export const store = configureStore({

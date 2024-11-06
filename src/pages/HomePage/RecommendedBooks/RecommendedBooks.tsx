@@ -8,22 +8,21 @@ import { useSelector } from "react-redux";
 import BooksList from "../BooksList/BooksList";
 import Pagination from "../../../components/Pagination/Pagination";
 import Loader from "../../../components/Loader/Loader";
-import { IBook, IBookLibrary } from "../../../redux/books/types";
+import { IBookLibrary } from "../../../redux/books/types";
 import Selector from "../../../components/Selector/Selector";
 
 export type RecBooksProps = {
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-  page: number;
-  title?: string;
-  items?: IBook[] | IBookLibrary[];
-  isHomePage?: boolean;
+  setPage?: React.Dispatch<React.SetStateAction<number>>;
+  page?: number;
+  title: string;
+  pageName: "home" | "library" | "reading" | undefined;
 };
 
 const BooksSection: FC<RecBooksProps> = ({
   setPage,
   page,
   title,
-  isHomePage,
+  pageName,
 }) => {
   const { results } = useSelector(selectRecommendedBooks);
   const inLibrary = useSelector(selectLibrariesBooks);
@@ -33,8 +32,7 @@ const BooksSection: FC<RecBooksProps> = ({
 
   const libraryItems = value ? filteredItems : inLibrary;
 
-  const items = isHomePage ? results : libraryItems;
-  // console.log(value);
+  const items = pageName === "home" ? results : libraryItems;
 
   useEffect(() => {
     setFilteredItems(inLibrary.filter((item) => item.status === value));
@@ -46,13 +44,15 @@ const BooksSection: FC<RecBooksProps> = ({
         <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
           {title}
         </h1>
-        {isHomePage && <Pagination setPage={setPage} page={page} />}
-        {!isHomePage && <Selector onChange={setValue} />}
+        {pageName === "home" && setPage && page && (
+          <Pagination setPage={setPage} page={page} />
+        )}
+        {pageName === "library" && <Selector onChange={setValue} />}
       </div>
       {isLoading ? (
         <Loader />
       ) : items && items.length > 0 ? (
-        <BooksList results={items} isHomePage={isHomePage} />
+        <BooksList results={items} pageName={pageName} />
       ) : (
         <p>Haven't found any book</p>
       )}

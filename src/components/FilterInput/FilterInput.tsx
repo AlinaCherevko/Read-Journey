@@ -3,8 +3,8 @@ import { FC, useState, useEffect } from "react";
 export type InputFilterProps = {
   placeholder: string;
   text: string;
-  setOption: React.Dispatch<React.SetStateAction<string>>;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setOption?: React.Dispatch<React.SetStateAction<string>>;
+  setPage?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Input: FC<InputFilterProps> = ({
@@ -16,13 +16,13 @@ const Input: FC<InputFilterProps> = ({
   const [value, setValue] = useState<string>("");
 
   useEffect(() => {
-    setOption(value);
+    if (setOption) setOption(value);
   }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("");
     setValue(e.target.value.trim());
-    setPage(1);
+    if (setPage) setPage(1);
   };
 
   return (

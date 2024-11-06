@@ -4,6 +4,7 @@ import {
   addToLibrary,
   deleteFromLibrary,
   getRecommendedBooks,
+  getUsersBooks,
 } from "./booksOperations";
 import { IBooksState } from "./types";
 
@@ -58,6 +59,15 @@ export const booksSlice = createSlice({
       state.inLibrary = state.inLibrary.filter(
         (item) => item._id !== payload.id
       );
+      state.isError = false;
+      state.isLoading = false;
+    });
+
+    //getUsersBooks
+    builder.addCase(getUsersBooks.pending, isPending);
+    builder.addCase(getUsersBooks.rejected, isRejected);
+    builder.addCase(getUsersBooks.fulfilled, (state, { payload }) => {
+      state.inLibrary = payload;
       state.isError = false;
       state.isLoading = false;
     });

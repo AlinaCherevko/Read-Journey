@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { addToLibrary } from "../../redux/books/booksOperations";
 
-const InfoModal: FC<BookProps> = ({ result, isInLibrary, isHomePage }) => {
+const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const addToLibraryHandler = () => {
@@ -35,7 +35,7 @@ const InfoModal: FC<BookProps> = ({ result, isInLibrary, isHomePage }) => {
           onClick={addToLibraryHandler}
         />
       )}
-      {!isHomePage && (
+      {pageName === "library" && (
         <Button
           type="button"
           text="Start reading"

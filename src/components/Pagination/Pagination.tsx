@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { RecBooksProps } from "../../pages/HomePage/RecommendedBooks/RecommendedBooks";
 import { useSelector } from "react-redux";
 import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
 import { toast } from "react-toastify";
+import { PaginationProps } from "./types";
 
-const Pagination: FC<RecBooksProps> = ({ setPage, page }) => {
+const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   const { totalPages } = useSelector(selectRecommendedBooks);
 
   const handleNextBtnClick = () => {

@@ -23,7 +23,6 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
           setPage={setPage}
         />
       </div>
-      {/* <Button text="To apply" type="submit" /> */}
 
       <div className="p-5 bg-light-bg-color rounded-md">
         <h2 className="text-mediumSmall text-primary-white font-bold mb-5 desktop:mb-10">

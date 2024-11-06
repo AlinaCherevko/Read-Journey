@@ -81,3 +81,26 @@ export const deleteFromLibrary = createAsyncThunk<
     }
   }
 });
+
+// get users books
+export const getUsersBooks = createAsyncThunk<
+  IBookLibrary[],
+  undefined,
+  { rejectValue: string }
+>("books/getUsersBooks", async (_, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+
+  try {
+    const { data } = await instance.get("books/own");
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
