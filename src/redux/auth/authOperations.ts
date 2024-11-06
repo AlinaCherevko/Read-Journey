@@ -13,14 +13,6 @@ export const instance = axios.create({
   baseURL: "https://readjourney.b.goit.study/api",
 });
 
-// export const setAuthHeader = (token: string) => {
-//   if (token) {
-//     instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-//     return;
-//   }
-//   instance.defaults.headers.common["Authorization"] = "";
-// };
-
 //signup
 export const signup = createAsyncThunk<
   ISignUpRes,
@@ -29,7 +21,7 @@ export const signup = createAsyncThunk<
 >("auth/register", async (credentials, thunkAPI) => {
   try {
     const { data } = await instance.post("/users/signup", credentials);
-    // setAuthHeader(data.token);
+
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -47,7 +39,7 @@ export const logIn = createAsyncThunk<
 >("auth/signin", async (credentials, thunkAPI) => {
   try {
     const { data } = await instance.post("/users/signin", credentials);
-    //setAuthHeader(data.token);
+
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -66,7 +58,6 @@ export const logOut = createAsyncThunk<
 >("auth/logout", async (_, thunkAPI) => {
   try {
     await instance.post("/users/signout");
-    //setAuthHeader();
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
       const errorMessage = error.response.data.message;
@@ -87,9 +78,8 @@ export const getCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue("Failed to fetch user");
   }
   try {
-    //setAuthHeader(persistedToken);
     const { data } = await instance.get("/users/current");
-    console.log(data);
+
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
@@ -107,7 +97,7 @@ export const refreshCurrentUser = createAsyncThunk<
 >("auth/refresh", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState;
   const persistedRefreshToken = state.auth.refreshToken;
-  console.log(persistedRefreshToken);
+
   try {
     const { data } = await instance.get("/users/current/refresh", {
       headers: {

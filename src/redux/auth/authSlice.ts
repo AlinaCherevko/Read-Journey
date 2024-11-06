@@ -36,16 +36,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
 
-  reducers: {
-    // updatesToken(
-    //   state,
-    //   action: PayloadAction<{ token: string; refreshToken: string }>
-    // ) {
-    //   console.log(action.payload);
-    //   state.token = action.payload.token;
-    //   state.refreshToken = action.payload.refreshToken;
-    // },
-  },
+  reducers: {},
   extraReducers(builder) {
     //register
     builder.addCase(signup.pending, handleAuthPending);
@@ -113,5 +104,5 @@ export const authSlice = createSlice({
     });
   },
 });
-//export const { updatesToken } = authSlice.actions;
+
 export const authReducer = authSlice.reducer;

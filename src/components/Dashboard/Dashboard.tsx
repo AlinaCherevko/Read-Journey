@@ -9,7 +9,7 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
       <span className="text-tiny text-primary-white mb-5 ml-3.5 tablet:text-small">
         Filters:
       </span>
-      <div className="flex flex-col gap-2 mb-5">
+      <div className="flex flex-col gap-3 tablet:gap-3.5 mb-5">
         <Input
           placeholder="Enter text"
           text="Book title:"

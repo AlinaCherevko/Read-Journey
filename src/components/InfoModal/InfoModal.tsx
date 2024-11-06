@@ -1,24 +1,18 @@
 import { FC } from "react";
 import { BookProps } from "../../pages/HomePage/BooksItem/types";
 import Button from "../Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { selectLibrariesBooks } from "../../redux/books/booksSelectors";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { addToLibrary } from "../../redux/books/booksOperations";
 
-const InfoModal: FC<BookProps> = ({ result }) => {
-  const inLibrary = useSelector(selectLibrariesBooks);
+const InfoModal: FC<BookProps> = ({ result, isInLibrary, isHomePage }) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const isBookInLibrary = inLibrary.some((book) => book._id === result._id);
-
   const addToLibraryHandler = () => {
-    if (isBookInLibrary) {
-      return;
-    } else {
-      dispatch(addToLibrary({ id: result._id }));
-    }
+    dispatch(addToLibrary({ id: result._id }));
   };
+
+  const handleStartReadingBook = () => {};
 
   return (
     <div className="w-[280px] h-auto p-10 text-center bg-gray-bg-color rounded-md mobileAdaptive:w-[335px] tablet:w-[500px] tablet:p-[50px]">
@@ -34,11 +28,20 @@ const InfoModal: FC<BookProps> = ({ result }) => {
       <p className="text-tiny text-primary-white mb-5 tablet:mb-8">
         {result.totalPages} pages
       </p>
-      <Button
-        type="button"
-        text={isBookInLibrary ? "Remove from library" : "Add to library"}
-        onClick={addToLibraryHandler}
-      />
+      {!isInLibrary && (
+        <Button
+          type="button"
+          text="Add to library"
+          onClick={addToLibraryHandler}
+        />
+      )}
+      {!isHomePage && (
+        <Button
+          type="button"
+          text="Start reading"
+          onClick={handleStartReadingBook}
+        />
+      )}
     </div>
   );
 };

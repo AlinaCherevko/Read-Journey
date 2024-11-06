@@ -1,14 +1,11 @@
 import { store, RootState } from "../store";
 import { instance, refreshCurrentUser } from "./authOperations";
-//import { updatesToken } from "./authSlice";
 
 instance.interceptors.request.use(
   function (config) {
     const state = store.getState() as RootState;
     const token = state.auth.token;
     const refreshToken = state.auth.refreshToken;
-    console.log(token);
-    console.log(config.url);
 
     if (config.url === "/users/current/refresh") {
       config.headers["Authorization"] = `Bearer ${refreshToken}`;
@@ -42,7 +39,7 @@ instance.interceptors.response.use(
 
         return instance(error.config);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
         return Promise.reject(err);
       }
     }

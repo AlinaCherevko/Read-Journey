@@ -1,13 +1,11 @@
 import { FC, useState } from "react";
-import { selectLibrariesBooks } from "../../redux/books/booksSelectors";
-import { useSelector } from "react-redux";
 import LibraryDashboard from "./LibraryDashboard/LibraryDasboard";
 import BooksSection from "../HomePage/RecommendedBooks/RecommendedBooks";
 
 const Library: FC = () => {
   const [page, setPage] = useState(1);
-  const libraryItems = useSelector(selectLibrariesBooks);
-  console.log(libraryItems);
+  const isHomePage = false;
+
   return (
     <section>
       <div className="wrapper">
@@ -16,8 +14,8 @@ const Library: FC = () => {
           <BooksSection
             setPage={setPage}
             page={page}
-            items={libraryItems}
             title="My library"
+            isHomePage={isHomePage}
           />
         </div>
       </div>

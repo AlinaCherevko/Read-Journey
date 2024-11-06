@@ -11,5 +11,5 @@ export type InputProps<T extends FieldValues> = {
   label: Path<T>;
   register: UseFormRegister<T>;
   error: FieldError | undefined;
-  success: boolean | string;
+  success: boolean | string | number;
 };

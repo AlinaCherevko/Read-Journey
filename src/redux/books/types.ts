@@ -31,11 +31,16 @@ export interface IBookLibrary {
   author: string;
   imageUrl: string;
   totalPages: number;
-  status: "unread" | "in-progress";
+  status: "unread" | "in progress" | "done";
   owner: string;
   progress: [];
 }
 
 export interface IIdBook {
   id: string;
+}
+
+export interface IBookRemove {
+  id: string;
+  message: string;
 }

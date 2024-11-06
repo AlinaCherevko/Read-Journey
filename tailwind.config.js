@@ -27,6 +27,8 @@ export default {
         "dark-text-color": "rgba(227, 227, 227, 0.5)",
         "red-error-color": "#E90516",
         "green-success-color": "#30B94D",
+        "red-trash-color": "#E85050",
+        "red-bg-transparent": "rgba(232, 80, 80, 0.2)",
       },
       backgroundImage: {
         iphoneMob: "url('/public/images/iphone-mob-1x.png')",

@@ -8,5 +8,5 @@ export type LoginValues = Omit<FormValues, "name">;
 export type AddBookValues = {
   title: string;
   author: string;
-  pages: string;
+  pages: number;
 };

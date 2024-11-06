@@ -1,12 +1,29 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect, memo } from "react";
 import { BookProps } from "./types";
 import Modal from "../../../components/Modal/Modal";
 import InfoModal from "../../../components/InfoModal/InfoModal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLibrariesBooks } from "../../../redux/books/booksSelectors";
+import Icon from "../../../components/Icon/Icon";
+import { AppDispatch } from "../../../redux/store";
+import { deleteFromLibrary } from "../../../redux/books/booksOperations";
 
 const BooksItem: FC<BookProps> = ({ result, isHomePage }) => {
+  const [isInLibrary, setIsInLibrary] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
+  const inLibrary = useSelector(selectLibrariesBooks);
+  const dispatch: AppDispatch = useDispatch();
 
-  console.log(isInfoModalVisible);
+  useEffect(() => {
+    setIsInLibrary(inLibrary.some((book) => book.title === result.title));
+  }, [inLibrary, result.title]);
+
+  const handleDeleteFromLibrary = () => {
+    dispatch(deleteFromLibrary({ id: result._id }));
+    setIsInLibrary(false);
+    setIsInfoModalVisible(false);
+  };
+
   return (
     <>
       <div
@@ -18,18 +35,40 @@ const BooksItem: FC<BookProps> = ({ result, isHomePage }) => {
           src={result.imageUrl}
           alt="book-rec"
         />
-        <h3 className="text-small text-primary-white font-bold mb-0.5 whitespace-nowrap overflow-hidden overflow-ellipsis">
-          {result.title}
-        </h3>
-        <p className="text-tiny">{result.author}</p>
+        <div className="flex items-center justify-between">
+          <div className="w-[80px] tablet:w-[100px]">
+            <h3 className="text-small text-primary-white font-bold mb-0.5 whitespace-nowrap overflow-hidden overflow-ellipsis">
+              {result.title}
+            </h3>
+            <p className="text-tiny">{result.author}</p>
+          </div>
+          {isInLibrary && !isHomePage && (
+            <div
+              onClick={handleDeleteFromLibrary}
+              className="cursor-pointer flex items-center justify-center w-7 h-7 rounded-full border border-red-bg-transparent hover:bg-red-bg-transparent"
+            >
+              <Icon
+                stroke="#E85050"
+                fill="transparent"
+                id="icon-trash"
+                width="16px"
+                height="16px"
+              />
+            </div>
+          )}
+        </div>
       </div>
-      {isInfoModalVisible && isHomePage && (
+      {isInfoModalVisible && (
         <Modal onClose={() => setIsInfoModalVisible(false)}>
-          <InfoModal result={result} />
+          <InfoModal
+            result={result}
+            isInLibrary={isInLibrary}
+            isHomePage={isHomePage}
+          />
         </Modal>
       )}
     </>
   );
 };
 
-export default BooksItem;
+export default memo(BooksItem);

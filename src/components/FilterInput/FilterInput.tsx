@@ -14,7 +14,6 @@ const Input: FC<InputFilterProps> = ({
   setPage,
 }) => {
   const [value, setValue] = useState<string>("");
-  console.log(value);
 
   useEffect(() => {
     setOption(value);

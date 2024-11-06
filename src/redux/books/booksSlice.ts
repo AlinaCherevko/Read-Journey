@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { addToLibrary, getRecommendedBooks } from "./booksOperations";
+import {
+  addToLibrary,
+  deleteFromLibrary,
+  getRecommendedBooks,
+} from "./booksOperations";
 import { IBooksState } from "./types";
 
 const initialState: IBooksState = {
@@ -33,7 +37,6 @@ export const booksSlice = createSlice({
     builder.addCase(getRecommendedBooks.pending, isPending);
     builder.addCase(getRecommendedBooks.rejected, isRejected);
     builder.addCase(getRecommendedBooks.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.recommended.results = payload.results;
       state.recommended.totalPages = payload.totalPages;
       state.isError = false;
@@ -44,6 +47,17 @@ export const booksSlice = createSlice({
     builder.addCase(addToLibrary.rejected, isRejected);
     builder.addCase(addToLibrary.fulfilled, (state, { payload }) => {
       state.inLibrary.push(payload);
+      state.isError = false;
+      state.isLoading = false;
+    });
+
+    //removeFromLibrary
+    builder.addCase(deleteFromLibrary.pending, isPending);
+    builder.addCase(deleteFromLibrary.rejected, isRejected);
+    builder.addCase(deleteFromLibrary.fulfilled, (state, { payload }) => {
+      state.inLibrary = state.inLibrary.filter(
+        (item) => item._id !== payload.id
+      );
       state.isError = false;
       state.isLoading = false;
     });

@@ -30,7 +30,7 @@ const AddBookForm: FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-2 mb-5"
+      className="flex flex-col gap-3 tablet:gap-3.5 mb-5"
     >
       <FormInput
         placeholder="Enter text"
