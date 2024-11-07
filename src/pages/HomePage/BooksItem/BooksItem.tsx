@@ -16,7 +16,7 @@ const BooksItem: FC<BookProps> = ({ result, pageName }) => {
 
   useEffect(() => {
     setIsInLibrary(inLibrary.some((book) => book.title === result.title));
-  }, [inLibrary, result.title]);
+  }, [inLibrary, result]);
 
   const handleDeleteFromLibrary = () => {
     dispatch(deleteFromLibrary({ id: result._id }));

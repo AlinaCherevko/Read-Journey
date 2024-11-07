@@ -5,6 +5,7 @@ import {
   IIdBook,
   IRecommendedBooks,
   IRecommendedReq,
+  IStartRead,
 } from "./types";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
@@ -96,6 +97,75 @@ export const getUsersBooks = createAsyncThunk<
 
   try {
     const { data } = await instance.get("books/own");
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
+
+// start reading
+export const startReadBook = createAsyncThunk<
+  IBookLibrary,
+  IStartRead,
+  { rejectValue: string }
+>("books/startReadBook", async ({ id, page }, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+
+  try {
+    const { data } = await instance.post("books/reading/start", { id, page });
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
+
+//stop reading
+export const stopReadBook = createAsyncThunk<
+  IBookLibrary,
+  IStartRead,
+  { rejectValue: string }
+>("books/stopReadBook", async ({ id, page }, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+
+  try {
+    const { data } = await instance.post("books/reading/finish", { id, page });
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
+
+// get current book
+export const getCurrentBook = createAsyncThunk<
+  IBookLibrary,
+  IIdBook,
+  { rejectValue: string }
+>("books/getCurrentBook", async ({ id }, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+
+  try {
+    const { data } = await instance.get(`books/${id}`);
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {

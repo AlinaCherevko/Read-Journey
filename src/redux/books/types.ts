@@ -1,7 +1,8 @@
 export interface IBooksState {
   recommended: IRecommendedBooks;
   inLibrary: IBookLibrary[];
-  isError: boolean;
+  currentBook: IBookLibrary | null;
+  error: string | undefined;
   isLoading: boolean;
 }
 
@@ -31,9 +32,10 @@ export interface IBookLibrary {
   author: string;
   imageUrl: string;
   totalPages: number;
-  status: "unread" | "in progress" | "done";
+  status: "unread" | "in-progress" | "done";
   owner: string;
-  progress: [];
+  progress: IProgress[];
+  timeLeftToRead?: ITime;
 }
 
 export interface IIdBook {
@@ -43,4 +45,24 @@ export interface IIdBook {
 export interface IBookRemove {
   id: string;
   message: string;
+}
+
+export interface IProgress {
+  startPage: number;
+  startReading: string;
+  finishPage: number;
+  finishReading: string;
+  speed: number;
+  status: string;
+  _id: string;
+}
+
+export interface IStartRead extends IIdBook {
+  page: number;
+}
+
+export interface ITime {
+  hours: number;
+  minutes: number;
+  seconds: number;
 }

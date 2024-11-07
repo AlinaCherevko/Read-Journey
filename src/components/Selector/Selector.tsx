@@ -7,7 +7,7 @@ const SelectEl: FC<ISelect> = ({ onChange }) => {
   const options = [
     { value: "all", label: "Show all" },
     { value: "unread", label: "Unread" },
-    { value: "in progress", label: "In progress" },
+    { value: "in-progress", label: "In progress" },
     { value: "done", label: "Done" },
   ];
 

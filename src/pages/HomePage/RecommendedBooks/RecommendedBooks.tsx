@@ -29,7 +29,7 @@ const BooksSection: FC<RecBooksProps> = ({
   const isLoading = useSelector(selectBooksLoading);
   const [value, setValue] = useState<string>("");
   const [filteredItems, setFilteredItems] = useState<IBookLibrary[]>([]);
-
+  console.log(inLibrary);
   const libraryItems = value ? filteredItems : inLibrary;
 
   const items = pageName === "home" ? results : libraryItems;

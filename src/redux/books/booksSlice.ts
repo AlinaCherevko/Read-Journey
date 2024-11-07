@@ -1,10 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   addToLibrary,
   deleteFromLibrary,
   getRecommendedBooks,
   getUsersBooks,
+  getCurrentBook,
+  startReadBook,
+  stopReadBook,
 } from "./booksOperations";
 import { IBooksState } from "./types";
 
@@ -13,18 +16,22 @@ const initialState: IBooksState = {
     results: [],
     totalPages: 0,
   },
+  currentBook: null,
   inLibrary: [],
-  isError: false,
+  error: "",
   isLoading: false,
 };
 
 const isPending = (state: IBooksState) => {
   state.isLoading = true;
-  state.isError = false;
+  state.error = "";
 };
 
-const isRejected = (state: IBooksState) => {
-  state.isError = true;
+const isRejected = (
+  state: IBooksState,
+  action: PayloadAction<string | undefined>
+) => {
+  state.error = action.payload;
   state.isLoading = false;
 };
 
@@ -40,7 +47,7 @@ export const booksSlice = createSlice({
     builder.addCase(getRecommendedBooks.fulfilled, (state, { payload }) => {
       state.recommended.results = payload.results;
       state.recommended.totalPages = payload.totalPages;
-      state.isError = false;
+      state.error = "";
       state.isLoading = false;
     });
     //addBookToLibrary
@@ -48,7 +55,7 @@ export const booksSlice = createSlice({
     builder.addCase(addToLibrary.rejected, isRejected);
     builder.addCase(addToLibrary.fulfilled, (state, { payload }) => {
       state.inLibrary.push(payload);
-      state.isError = false;
+      state.error = "";
       state.isLoading = false;
     });
 
@@ -59,7 +66,7 @@ export const booksSlice = createSlice({
       state.inLibrary = state.inLibrary.filter(
         (item) => item._id !== payload.id
       );
-      state.isError = false;
+      state.error = "";
       state.isLoading = false;
     });
 
@@ -68,8 +75,35 @@ export const booksSlice = createSlice({
     builder.addCase(getUsersBooks.rejected, isRejected);
     builder.addCase(getUsersBooks.fulfilled, (state, { payload }) => {
       state.inLibrary = payload;
-      state.isError = false;
+      state.error = "";
       state.isLoading = false;
+    });
+
+    //getCurrentBook
+    builder.addCase(getCurrentBook.pending, isPending);
+    builder.addCase(getCurrentBook.rejected, isRejected);
+    builder.addCase(getCurrentBook.fulfilled, (state, { payload }) => {
+      state.currentBook = payload;
+      state.error = "";
+      state.isLoading = false;
+    });
+
+    //start reading book
+    builder.addCase(startReadBook.pending, isPending);
+    builder.addCase(startReadBook.rejected, isRejected);
+    builder.addCase(startReadBook.fulfilled, (state, { payload }) => {
+      state.currentBook = payload;
+      state.error = "";
+      state.isLoading = false;
+    });
+
+    //stop reading book
+    builder.addCase(stopReadBook.pending, isPending);
+    builder.addCase(stopReadBook.rejected, isRejected);
+    builder.addCase(stopReadBook.fulfilled, (state, { payload }) => {
+      state.currentBook = payload;
+      state.isLoading = false;
+      state.error = "";
     });
   },
 });
