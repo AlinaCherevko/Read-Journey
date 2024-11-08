@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentBook } from "../../../redux/books/booksSelectors";
-import { BookSectionProps } from "./types";
-// import { AppDispatch } from "../../../redux/store";
 
-const BookSection: FC<BookSectionProps> = ({ status }) => {
+const BookSection: FC = () => {
   const currentBook = useSelector(selectCurrentBook);
-  //const dispatch: AppDispatch = useDispatch();
+  const status =
+    currentBook?.progress?.[currentBook.progress.length - 1]?.status;
+
   console.log(status);
   console.log(currentBook);
+  console.log(status);
 
   return (
     <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
@@ -35,7 +36,7 @@ const BookSection: FC<BookSectionProps> = ({ status }) => {
             <button>
               <img
                 className="w-10 h-10 tablet:w-[50px] tablet:h-[50px]"
-                src={status === "stop" ? "/btn-start.png" : "/btn-stop.png"}
+                src={status === "inactive" ? "/btn-start.png" : "/btn-stop.png"}
                 alt="button-read"
               />
             </button>

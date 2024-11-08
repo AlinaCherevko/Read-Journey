@@ -1,4 +1,4 @@
 export type ReadingDashboardProps = {
-  handleStatusChange: (props: "stop" | "start") => void;
-  status: "stop" | "start";
+  //handleStatusChange: (props: "stop" | "start") => void;
+  status?: "stop" | "start";
 };

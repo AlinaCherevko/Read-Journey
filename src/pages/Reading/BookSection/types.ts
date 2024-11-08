@@ -1,3 +1,3 @@
 export type BookSectionProps = {
-  status: "stop" | "start";
+  status?: "stop" | "start";
 };

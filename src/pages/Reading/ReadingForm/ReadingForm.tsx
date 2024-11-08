@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,23 +9,51 @@ import {
   startReadBook,
   stopReadBook,
 } from "../../../redux/books/booksOperations";
-import { selectCurrentBook } from "../../../redux/books/booksSelectors";
+import {
+  selectBookError,
+  selectCurrentBook,
+} from "../../../redux/books/booksSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
+import { toast } from "react-toastify";
 
-type ReadingFormProps = {
-  text: string;
-  handleStatusChange: (props: "stop" | "start") => void;
-  status: "stop" | "start";
-};
-
-const ReadingForm: FC<ReadingFormProps> = ({
-  text,
-  handleStatusChange,
-  status,
-}) => {
+const ReadingForm: FC = () => {
+  const [page, setPage] = useState<number | null>(null);
+  const error = useSelector(selectBookError);
   const currentBook = useSelector(selectCurrentBook);
+  const status =
+    currentBook?.progress?.[currentBook.progress.length - 1]?.status;
   const dispatch: AppDispatch = useDispatch();
+  console.log(error);
+  console.log(status);
+  console.log(page);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      return;
+    }
+    if (!error) {
+      if (status === "inactive") toast.success("Reading stopped successfully");
+
+      if (status === "active") toast.success("Reading started successfully");
+    }
+  }, [error, status]);
+
+  useEffect(() => {
+    if (currentBook && page !== null) {
+      if (status === "active") {
+        dispatch(stopReadBook({ id: currentBook._id, page }));
+        if (error) return;
+      }
+      if (status === "inactive") {
+        dispatch(startReadBook({ id: currentBook._id, page }));
+        if (error) return;
+      }
+
+      setPage(null);
+    }
+  }, [page, currentBook, dispatch, status, error]);
 
   const {
     register,
@@ -38,17 +66,7 @@ const ReadingForm: FC<ReadingFormProps> = ({
   });
 
   const onSubmit: SubmitHandler<ReadBookValues> = (data) => {
-    if (status === "stop" && currentBook) {
-      dispatch(startReadBook({ id: currentBook._id, page: data.pages }));
-      handleStatusChange("start");
-    }
-    if (status === "start" && currentBook) {
-      dispatch(stopReadBook({ id: currentBook._id, page: data.pages }));
-      handleStatusChange("stop");
-    }
-
-    console.log(data);
-
+    setPage(Number(data.pages));
     reset();
   };
 
@@ -61,7 +79,10 @@ const ReadingForm: FC<ReadingFormProps> = ({
         error={errors.pages}
         register={register}
       />
-      <Button type="submit" text={text} />
+      <Button
+        type="submit"
+        text={status === "active" ? "To stop" : "To start"}
+      />
     </form>
   );
 };

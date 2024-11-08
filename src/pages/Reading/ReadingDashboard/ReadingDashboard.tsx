@@ -1,21 +1,18 @@
 import { FC } from "react";
 import ReadingForm from "../ReadingForm/ReadingForm";
-import { ReadingDashboardProps } from "./types";
+import { useSelector } from "react-redux";
+import { selectCurrentBook } from "../../../redux/books/booksSelectors";
 
-const ReadingDashboard: FC<ReadingDashboardProps> = ({
-  handleStatusChange,
-  status,
-}) => {
+const ReadingDashboard: FC = () => {
+  const currentBook = useSelector(selectCurrentBook);
+  const status =
+    currentBook?.progress?.[currentBook.progress.length - 1]?.status;
   return (
     <div className="bg-gray-bg-color w-full rounded-lg p-5 tablet:p-8 desktop:p-5 desktop:pt-10 desktop:w-[353px]">
       <span className="text-tiny text-primary-white mb-5 ml-3.5 tablet:text-small">
-        {status === "stop" ? "Start page: " : "Stop page: "}
+        {status === "active" ? "To stop" : "To start"}
       </span>
-      <ReadingForm
-        text={status === "stop" ? "To start" : "To stop"}
-        handleStatusChange={handleStatusChange}
-        status={status}
-      />
+      <ReadingForm />
       <div className="mt-10">
         <span className="text-mediumSmall text-primary-white font-bold ">
           Progress
