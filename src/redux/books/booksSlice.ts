@@ -8,6 +8,7 @@ import {
   getCurrentBook,
   startReadBook,
   stopReadBook,
+  deleteSession,
 } from "./booksOperations";
 import { IBooksState } from "./types";
 
@@ -101,6 +102,15 @@ export const booksSlice = createSlice({
     builder.addCase(stopReadBook.pending, isPending);
     builder.addCase(stopReadBook.rejected, isRejected);
     builder.addCase(stopReadBook.fulfilled, (state, { payload }) => {
+      state.currentBook = payload;
+      state.isLoading = false;
+      state.error = "";
+    });
+
+    //delete reading session
+    builder.addCase(deleteSession.pending, isPending);
+    builder.addCase(deleteSession.rejected, isRejected);
+    builder.addCase(deleteSession.fulfilled, (state, { payload }) => {
       state.currentBook = payload;
       state.isLoading = false;
       state.error = "";

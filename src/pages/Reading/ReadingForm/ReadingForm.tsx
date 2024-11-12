@@ -26,9 +26,6 @@ const ReadingForm: FC = () => {
   const status =
     currentBook?.progress?.[currentBook.progress.length - 1]?.status;
   const dispatch: AppDispatch = useDispatch();
-  console.log(error);
-  console.log(status);
-  console.log(page);
 
   useEffect(() => {
     if (!isFirstRender) {

@@ -176,7 +176,7 @@ export const getCurrentBook = createAsyncThunk<
   }
 });
 
-//deleate reading session
+//delete reading session
 export const deleteSession = createAsyncThunk<
   IBookLibrary,
   ISessionReading,
@@ -189,12 +189,9 @@ export const deleteSession = createAsyncThunk<
   }
 
   try {
-    const { data } = await instance.delete("books/reading", {
-      data: {
-        bookId,
-        readingId,
-      },
-    });
+    const { data } = await instance.delete(
+      `books/reading?bookId=${bookId}&readingId=${readingId}`
+    );
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {

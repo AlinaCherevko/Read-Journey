@@ -14,7 +14,9 @@ const Diary: FC = () => {
       </h2>
       <ul className="p-4 bg-light-bg-color rounded-md flex flex-col gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto">
         {currentBook?.progress &&
-          currentBook.progress.map((item) => <ReadingInfo item={item} />)}
+          currentBook.progress.map((item) => (
+            <ReadingInfo key={item._id} item={item} />
+          ))}
       </ul>
     </div>
   );
