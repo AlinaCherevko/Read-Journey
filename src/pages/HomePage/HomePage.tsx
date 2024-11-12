@@ -2,7 +2,10 @@ import { FC, useEffect, useState } from "react";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import { AppDispatch } from "../../redux/store";
 import { useDispatch } from "react-redux";
-import { getRecommendedBooks } from "../../redux/books/booksOperations";
+import {
+  getRecommendedBooks,
+  getUsersBooks,
+} from "../../redux/books/booksOperations";
 import BooksSection from "./RecommendedBooks/RecommendedBooks";
 
 const HomePage: FC = () => {
@@ -12,6 +15,10 @@ const HomePage: FC = () => {
   const pageName = "home";
 
   const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsersBooks());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getRecommendedBooks({ page, title, author }));

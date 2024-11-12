@@ -16,8 +16,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { toast } from "react-toastify";
+import { CurrentStatus } from "../../../redux/books/types";
 
 const ReadingForm: FC = () => {
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [page, setPage] = useState<number | null>(null);
   const error = useSelector(selectBookError);
   const currentBook = useSelector(selectCurrentBook);
@@ -29,24 +31,28 @@ const ReadingForm: FC = () => {
   console.log(page);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-      return;
-    }
-    if (!error) {
-      if (status === "inactive") toast.success("Reading stopped successfully");
+    if (!isFirstRender) {
+      if (error) {
+        toast.error(error);
+        return;
+      }
+      if (!error) {
+        if (status === CurrentStatus.INACTIVE)
+          toast.success("Reading stopped successfully");
 
-      if (status === "active") toast.success("Reading started successfully");
+        if (status === CurrentStatus.ACTIVE)
+          toast.success("Reading started successfully");
+      }
     }
-  }, [error, status]);
+  }, [error, status, isFirstRender]);
 
   useEffect(() => {
     if (currentBook && page !== null) {
-      if (status === "active") {
+      if (status === CurrentStatus.ACTIVE) {
         dispatch(stopReadBook({ id: currentBook._id, page }));
         if (error) return;
       }
-      if (status === "inactive") {
+      if (status === CurrentStatus.INACTIVE || !status) {
         dispatch(startReadBook({ id: currentBook._id, page }));
         if (error) return;
       }
@@ -66,7 +72,9 @@ const ReadingForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<ReadBookValues> = (data) => {
+    setIsFirstRender(false);
     setPage(Number(data.pages));
+
     reset();
   };
 
@@ -81,7 +89,7 @@ const ReadingForm: FC = () => {
       />
       <Button
         type="submit"
-        text={status === "active" ? "To stop" : "To start"}
+        text={status === CurrentStatus.ACTIVE ? "To stop" : "To start"}
       />
     </form>
   );

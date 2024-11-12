@@ -7,9 +7,11 @@ import {
   addToLibrary,
   getCurrentBook,
 } from "../../redux/books/booksOperations";
+import { useNavigate } from "react-router-dom";
 
 const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addToLibraryHandler = () => {
     dispatch(addToLibrary({ id: result._id }));
@@ -17,6 +19,7 @@ const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
 
   const handleStartReadingBook = () => {
     dispatch(getCurrentBook({ id: result._id }));
+    navigate("/reading");
   };
 
   return (

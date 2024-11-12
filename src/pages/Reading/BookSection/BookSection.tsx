@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentBook } from "../../../redux/books/booksSelectors";
+import { CurrentStatus } from "../../../redux/books/types";
 
 const BookSection: FC = () => {
   const currentBook = useSelector(selectCurrentBook);
@@ -36,7 +37,11 @@ const BookSection: FC = () => {
             <button>
               <img
                 className="w-10 h-10 tablet:w-[50px] tablet:h-[50px]"
-                src={status === "inactive" ? "/btn-start.png" : "/btn-stop.png"}
+                src={
+                  status === CurrentStatus.INACTIVE || !status
+                    ? "/btn-start.png"
+                    : "/btn-stop.png"
+                }
                 alt="button-read"
               />
             </button>

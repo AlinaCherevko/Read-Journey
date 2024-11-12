@@ -5,6 +5,7 @@ import {
   IIdBook,
   IRecommendedBooks,
   IRecommendedReq,
+  ISessionReading,
   IStartRead,
 } from "./types";
 import { AxiosError } from "axios";
@@ -166,6 +167,34 @@ export const getCurrentBook = createAsyncThunk<
 
   try {
     const { data } = await instance.get(`books/${id}`);
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
+
+//deleate reading session
+export const deleteSession = createAsyncThunk<
+  IBookLibrary,
+  ISessionReading,
+  { rejectValue: string }
+>("books/deleteSession", async ({ bookId, readingId }, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+
+  try {
+    const { data } = await instance.delete("books/reading", {
+      data: {
+        bookId,
+        readingId,
+      },
+    });
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {

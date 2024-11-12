@@ -32,7 +32,7 @@ export interface IBookLibrary {
   author: string;
   imageUrl: string;
   totalPages: number;
-  status: "unread" | "in-progress" | "done";
+  status: Status;
   owner: string;
   progress: IProgress[];
   timeLeftToRead?: ITime;
@@ -42,18 +42,33 @@ export interface IIdBook {
   id: string;
 }
 
+export interface ISessionReading {
+  bookId: string;
+  readingId: string;
+}
+
+export enum Status {
+  UNREAD = "unread",
+  INPROGRESS = "in-progress",
+  DONE = "done",
+}
+
 export interface IBookRemove {
   id: string;
   message: string;
 }
 
+export enum CurrentStatus {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+}
 export interface IProgress {
   startPage: number;
   startReading: string;
   finishPage: number;
   finishReading: string;
   speed: number;
-  status: string;
+  status: CurrentStatus;
   _id: string;
 }
 

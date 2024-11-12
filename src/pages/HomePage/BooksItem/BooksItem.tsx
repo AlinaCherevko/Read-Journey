@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from "react";
+import { FC, useState, memo } from "react";
 import { BookProps } from "./types";
 import Modal from "../../../components/Modal/Modal";
 import InfoModal from "../../../components/InfoModal/InfoModal";
@@ -6,21 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLibrariesBooks } from "../../../redux/books/booksSelectors";
 import Icon from "../../../components/Icon/Icon";
 import { AppDispatch } from "../../../redux/store";
-import { deleteFromLibrary } from "../../../redux/books/booksOperations";
+import {
+  deleteFromLibrary,
+  //getUsersBooks,
+} from "../../../redux/books/booksOperations";
 
 const BooksItem: FC<BookProps> = ({ result, pageName }) => {
-  const [isInLibrary, setIsInLibrary] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
   const inLibrary = useSelector(selectLibrariesBooks);
   const dispatch: AppDispatch = useDispatch();
 
-  useEffect(() => {
-    setIsInLibrary(inLibrary.some((book) => book.title === result.title));
-  }, [inLibrary, result]);
+  const isInLibrary = inLibrary.some((book) => book.title === result.title);
 
   const handleDeleteFromLibrary = () => {
     dispatch(deleteFromLibrary({ id: result._id }));
-    setIsInLibrary(false);
     setIsInfoModalVisible(false);
   };
 
