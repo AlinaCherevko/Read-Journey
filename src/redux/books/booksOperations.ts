@@ -3,6 +3,7 @@ import {
   IBookLibrary,
   IBookRemove,
   IIdBook,
+  IOwnBook,
   IRecommendedBooks,
   IRecommendedReq,
   ISessionReading,
@@ -192,6 +193,32 @@ export const deleteSession = createAsyncThunk<
     const { data } = await instance.delete(
       `books/reading?bookId=${bookId}&readingId=${readingId}`
     );
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError && error.response) {
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+});
+
+//add own book to library
+export const addOwnBook = createAsyncThunk<
+  IBookLibrary,
+  IOwnBook,
+  { rejectValue: string }
+>("books/addOwnBook", async ({ title, author, totalPages }, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue("Token is missing");
+  }
+  try {
+    const { data } = await instance.post("books/add", {
+      title,
+      author,
+      totalPages,
+    });
     return data;
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {

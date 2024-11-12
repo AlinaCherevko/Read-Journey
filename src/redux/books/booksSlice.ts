@@ -9,6 +9,7 @@ import {
   startReadBook,
   stopReadBook,
   deleteSession,
+  addOwnBook,
 } from "./booksOperations";
 import { IBooksState } from "./types";
 
@@ -114,6 +115,15 @@ export const booksSlice = createSlice({
       state.currentBook = payload;
       state.isLoading = false;
       state.error = "";
+    });
+
+    //addOwnBook
+    builder.addCase(addOwnBook.pending, isPending);
+    builder.addCase(addOwnBook.rejected, isRejected);
+    builder.addCase(addOwnBook.fulfilled, (state, { payload }) => {
+      state.inLibrary.push(payload);
+      state.error = "";
+      state.isLoading = false;
     });
   },
 });

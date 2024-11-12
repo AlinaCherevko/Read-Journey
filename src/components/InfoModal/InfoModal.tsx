@@ -26,7 +26,11 @@ const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
     <div className="w-[280px] h-auto p-10 text-center bg-gray-bg-color rounded-md mobileAdaptive:w-[335px] tablet:w-[500px] tablet:p-[50px]">
       <img
         className="w-[137px] h-[208px] mb-4 mx-auto rounded-sm tablet:w-[153px] tablet:h-[233px]"
-        src={result.imageUrl}
+        src={
+          result.imageUrl
+            ? result.imageUrl
+            : "https://images.pexels.com/photos/1105564/pexels-photo-1105564.jpeg"
+        }
         alt="book-rec"
       />
       <h3 className="text-mediumSmall text-primary-white font-bold mb-0.5 tablet:text-lightMedium">

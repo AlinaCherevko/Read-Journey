@@ -31,7 +31,11 @@ const BooksItem: FC<BookProps> = ({ result, pageName }) => {
       >
         <img
           className="w-full tablet:w-[137px] h-[208px] mb-2 rounded-sm"
-          src={result.imageUrl}
+          src={
+            result.imageUrl
+              ? result.imageUrl
+              : "https://images.pexels.com/photos/1105564/pexels-photo-1105564.jpeg"
+          }
           alt="book-rec"
         />
         <div className="flex items-center justify-between">

@@ -33,15 +33,8 @@ const ReadingForm: FC = () => {
         toast.error(error);
         return;
       }
-      if (!error) {
-        if (status === CurrentStatus.INACTIVE)
-          toast.success("Reading stopped successfully");
-
-        if (status === CurrentStatus.ACTIVE)
-          toast.success("Reading started successfully");
-      }
     }
-  }, [error, status, isFirstRender]);
+  }, [error, isFirstRender]);
 
   useEffect(() => {
     if (currentBook && page !== null) {
@@ -70,6 +63,11 @@ const ReadingForm: FC = () => {
 
   const onSubmit: SubmitHandler<ReadBookValues> = (data) => {
     setIsFirstRender(false);
+    if (currentBook && data.pages > currentBook?.totalPages) {
+      toast.error("You've exceed the total pages of the book!");
+      reset();
+      return;
+    }
     setPage(Number(data.pages));
 
     reset();

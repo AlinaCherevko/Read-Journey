@@ -18,7 +18,11 @@ const BookSection: FC = () => {
           <div className="mt-10 tablet:mt-8 text-center desktop:mt-11">
             <img
               className="w-[137px] h-[208px] mb-4 mx-auto rounded-sm tablet:w-[169px] tablet:h-[256px] desktop:w-[224px] desktop:h-[340px]"
-              src={currentBook.imageUrl}
+              src={
+                currentBook.imageUrl
+                  ? currentBook.imageUrl
+                  : "https://images.pexels.com/photos/1105564/pexels-photo-1105564.jpeg"
+              }
               alt="book-rec"
             />
             <h3 className="text-mediumSmall text-primary-white font-bold mb-0.5 tablet:text-lightMedium">

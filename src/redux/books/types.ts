@@ -41,6 +41,11 @@ export interface IBookLibrary {
 export interface IIdBook {
   id: string;
 }
+export interface IOwnBook {
+  title: string;
+  author: string;
+  totalPages: number;
+}
 
 export interface ISessionReading {
   bookId: string;

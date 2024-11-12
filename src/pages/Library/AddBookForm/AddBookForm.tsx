@@ -5,8 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { schemaAddBook } from "../../../schemas/schemas";
 import { AddBookValues } from "../../RegisterPage/RegisterForm/types";
+import { AppDispatch } from "../../../redux/store";
+import { useDispatch } from "react-redux";
+import { addOwnBook } from "../../../redux/books/booksOperations";
 
 const AddBookForm: FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -20,6 +24,13 @@ const AddBookForm: FC = () => {
 
   const onSubmit: SubmitHandler<AddBookValues> = (data) => {
     console.log(data);
+    dispatch(
+      addOwnBook({
+        title: data.title,
+        author: data.author,
+        totalPages: data.pages,
+      })
+    );
     reset();
   };
 
