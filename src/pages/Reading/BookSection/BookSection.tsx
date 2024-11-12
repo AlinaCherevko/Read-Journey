@@ -8,10 +8,6 @@ const BookSection: FC = () => {
   const status =
     currentBook?.progress?.[currentBook.progress.length - 1]?.status;
 
-  console.log(status);
-  console.log(currentBook);
-  console.log(status);
-
   return (
     <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
       <div className="">

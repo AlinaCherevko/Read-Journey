@@ -8,26 +8,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../../redux/auth/authOperations";
-import { selectError, selectUser } from "../../../redux/auth/authSelectors";
+import { selectError, selectToken } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const RegisterForm: FC = () => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);
-  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     if (!isFirstRender) {
-      if (user) {
+      if (token) {
         toast.success("User successfully signUp");
       }
       if (error) {
         toast.error(error as string);
       }
     }
-  }, [error, user, isFirstRender]);
+  }, [error, token, isFirstRender]);
 
   const {
     register,

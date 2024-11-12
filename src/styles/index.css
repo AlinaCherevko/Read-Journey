@@ -17,7 +17,7 @@
 }
 
 :root {
-  @apply font-gilroy  font-medium text-main-text-color bg-primary-black;
+  @apply font-gilroy font-medium text-main-text-color bg-primary-black;
 }
 
 html {

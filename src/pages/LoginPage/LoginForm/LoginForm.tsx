@@ -8,7 +8,7 @@ import { schemaLog } from "../../../schemas/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import { selectError, selectUser } from "../../../redux/auth/authSelectors";
+import { selectError, selectToken } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { logIn } from "../../../redux/auth/authOperations";
 
@@ -16,20 +16,18 @@ const LoginForm: FC = () => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);
   const dispatch: AppDispatch = useDispatch();
-  const user = useSelector(selectUser);
-
-  console.log(user);
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     if (!isFirstRender) {
-      if (user) {
+      if (token) {
         toast.success("User successfully logged in");
       }
       if (error) {
         toast.error(error as string);
       }
     }
-  }, [error, user, isFirstRender]);
+  }, [error, token, isFirstRender]);
 
   const {
     register,
