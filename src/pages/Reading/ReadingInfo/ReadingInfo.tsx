@@ -5,6 +5,7 @@ import { selectCurrentBook } from "../../../redux/books/booksSelectors";
 import Icon from "../../../components/Icon/Icon";
 import { deleteSession } from "../../../redux/books/booksOperations";
 import { AppDispatch } from "../../../redux/store";
+import AreaCharts from "../AreaCharts/AreaCharts";
 
 export type InfoProps = {
   item: IProgress;
@@ -67,9 +68,10 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
         )}
         {item.finishReading && <p className="text-tiny">{readingTime}</p>}
       </div>
-      <div className="flex justify-between">
+      <div className="flex w-[82px]">
         <div className="flex flex-col justify-between">
           {pages && <p className="text-lightSmall">{pages} pages</p>}
+          <AreaCharts item={item} />
           {(item.speed || item.speed === 0) && (
             <p className="text-tiny">{speed} pages per hour</p>
           )}
@@ -77,8 +79,8 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
         <button onClick={handleDeleteReadingSession}>
           <Icon
             id="icon-trash"
-            width="18px"
-            height="18px"
+            width="14px"
+            height="14px"
             fill="transparent"
             stroke="#f9f9f9"
           />

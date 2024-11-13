@@ -17,6 +17,7 @@ const LoginForm: FC = () => {
   const error = useSelector(selectError);
   const dispatch: AppDispatch = useDispatch();
   const token = useSelector(selectToken);
+  console.log(token);
 
   useEffect(() => {
     if (!isFirstRender) {

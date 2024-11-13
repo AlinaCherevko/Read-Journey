@@ -2,8 +2,8 @@ import { FC } from "react";
 import ReadingForm from "../ReadingForm/ReadingForm";
 import { useSelector } from "react-redux";
 import { selectCurrentBook } from "../../../redux/books/booksSelectors";
-import Diary from "../Diary/Diary";
 import { CurrentStatus } from "../../../redux/books/types";
+import Details from "../Details/Details";
 
 const ReadingDashboard: FC = () => {
   const currentBook = useSelector(selectCurrentBook);
@@ -18,7 +18,7 @@ const ReadingDashboard: FC = () => {
         <ReadingForm />
       </div>
       {status ? (
-        <Diary />
+        <Details />
       ) : (
         <div className="mt-10 tablet:mt-0">
           <span className="text-mediumSmall text-primary-white font-bold ">
