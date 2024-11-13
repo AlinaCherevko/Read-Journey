@@ -41,8 +41,11 @@ const AddBookForm: FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-3 tablet:gap-3.5 mb-5"
+      className="flex flex-col gap-3 tablet:gap-3.5"
     >
+      <span className="text-tiny text-primary-white ml-3.5 tablet:text-small">
+        Create your library:
+      </span>
       <FormInput
         placeholder="Enter text"
         text="Book title:"

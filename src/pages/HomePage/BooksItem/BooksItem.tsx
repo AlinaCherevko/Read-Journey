@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLibrariesBooks } from "../../../redux/books/booksSelectors";
 import Icon from "../../../components/Icon/Icon";
 import { AppDispatch } from "../../../redux/store";
-import {
-  deleteFromLibrary,
-  //getUsersBooks,
-} from "../../../redux/books/booksOperations";
+import { deleteFromLibrary } from "../../../redux/books/booksOperations";
 
 const BooksItem: FC<BookProps> = ({ result, pageName }) => {
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
