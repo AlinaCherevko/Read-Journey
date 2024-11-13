@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import FormInput from "../../../components/FormInput/FormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,14 +13,15 @@ import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 
 const LoginForm: FC = () => {
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const error = useSelector(selectError);
 
   useEffect(() => {
-    if (error) {
+    if (error && !isFirstRender) {
       toast.error(error as string);
     }
-  }, [error]);
+  }, [error, isFirstRender]);
 
   const {
     register,
@@ -35,7 +36,7 @@ const LoginForm: FC = () => {
 
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
     dispatch(logIn({ email: data.email, password: data.password }));
-
+    setIsFirstRender(false);
     reset();
   };
 

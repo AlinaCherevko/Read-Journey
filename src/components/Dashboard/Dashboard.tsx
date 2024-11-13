@@ -64,7 +64,7 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
         </Link>
       </div>
       <div className="hidden desktop:flex gap-3.5 bg-light-bg-color mt-5 p-5 rounded-md">
-        <img src="../../../public/books.png" alt="book-q" />
+        <img src="/books.png" alt="book-q" />
         <div className="text-small items-center">
           "Books are{" "}
           <span className="text-small text-primary-white">windows </span>to the

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "../../../components/FormInput/FormInput";
@@ -13,15 +13,15 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const RegisterForm: FC = () => {
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);
-  // const token = useSelector(selectToken);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    if (error) {
+    if (error && !isFirstRender) {
       toast.error(error as string);
     }
-  }, [error]);
+  }, [error, isFirstRender]);
 
   const {
     register,
@@ -38,7 +38,7 @@ const RegisterForm: FC = () => {
     dispatch(
       signup({ name: data.name, email: data.email, password: data.password })
     );
-
+    setIsFirstRender(false);
     reset();
   };
   const isNameValid = !errors.name && getValues("name");
