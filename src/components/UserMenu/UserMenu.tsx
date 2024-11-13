@@ -3,7 +3,6 @@ import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { logOut } from "../../redux/auth/authOperations";
-import { toast } from "react-toastify";
 import { selectUser } from "../../redux/auth/authSelectors";
 
 const UserMenu: FC = () => {
@@ -12,7 +11,6 @@ const UserMenu: FC = () => {
 
   const handleLogout = () => {
     dispatch(logOut());
-    toast.success("User logged out");
   };
   return (
     <div className="flex gap-4 items-center ">

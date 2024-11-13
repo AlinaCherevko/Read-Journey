@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Button from "../../../components/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "../../../components/FormInput/FormInput";
@@ -8,26 +8,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../../redux/auth/authOperations";
-import { selectError, selectToken } from "../../../redux/auth/authSelectors";
+import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const RegisterForm: FC = () => {
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    if (!isFirstRender) {
-      if (token) {
-        toast.success("User successfully signUp");
-      }
-      if (error) {
-        toast.error(error as string);
-      }
+    if (error) {
+      toast.error(error as string);
     }
-  }, [error, token, isFirstRender]);
+  }, [error]);
 
   const {
     register,
@@ -41,7 +35,6 @@ const RegisterForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    setIsFirstRender(false);
     dispatch(
       signup({ name: data.name, email: data.email, password: data.password })
     );

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Button from "../../../components/Button/Button";
 import FormInput from "../../../components/FormInput/FormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -6,29 +6,21 @@ import { LoginValues } from "../../RegisterPage/RegisterForm/types";
 import { Link } from "react-router-dom";
 import { schemaLog } from "../../../schemas/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import { selectError, selectToken } from "../../../redux/auth/authSelectors";
-import { toast } from "react-toastify";
 import { logIn } from "../../../redux/auth/authOperations";
+import { selectError } from "../../../redux/auth/authSelectors";
+import { toast } from "react-toastify";
 
 const LoginForm: FC = () => {
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
-  const error = useSelector(selectError);
   const dispatch: AppDispatch = useDispatch();
-  const token = useSelector(selectToken);
-  console.log(token);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    if (!isFirstRender) {
-      if (token) {
-        toast.success("User successfully logged in");
-      }
-      if (error) {
-        toast.error(error as string);
-      }
+    if (error) {
+      toast.error(error as string);
     }
-  }, [error, token, isFirstRender]);
+  }, [error]);
 
   const {
     register,
@@ -42,7 +34,6 @@ const LoginForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
-    setIsFirstRender(false);
     dispatch(logIn({ email: data.email, password: data.password }));
 
     reset();
