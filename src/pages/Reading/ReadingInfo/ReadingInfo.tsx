@@ -38,11 +38,13 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
   );
   const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
 
-  const readingTime = item.finishReading
-    ? `${days ? `${days} days, ` : ""}${
-        hours ? `${hours} hours, ` : ""
-      }${minutes} minutes`
-    : null;
+  const readingTime =
+    duration < 1000 * 60
+      ? ">1 minute"
+      : `${days ? `${days} days, ` : ""}${
+          hours ? `${hours} hours, ` : ""
+        }${minutes} minutes`;
+
   const speed = item.speed === 0 ? "< 1" : item.speed;
 
   const currentDate = startReadingData.toLocaleDateString("uk-UA", {
