@@ -22,15 +22,15 @@ const CircleCharts: FC<CircleChartsProps> = ({ percentage }) => {
   ];
 
   const style = {
-    bottom: -10,
+    bottom: -5,
     lineHeight: "24px",
   };
   const greenSectorAngle = (percentage / 100) * 360;
   return (
     <div style={{ position: "relative" }}>
       <RadialBarChart
-        width={200}
-        height={200}
+        width={185}
+        height={185}
         cx="50%"
         cy="50%"
         innerRadius="70%"
@@ -44,8 +44,8 @@ const CircleCharts: FC<CircleChartsProps> = ({ percentage }) => {
       </RadialBarChart>
 
       <RadialBarChart
-        width={200}
-        height={200}
+        width={185}
+        height={185}
         cx="50%"
         cy="50%"
         innerRadius="80%"

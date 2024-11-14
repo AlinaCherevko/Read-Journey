@@ -9,16 +9,18 @@ const Statistic: FC = () => {
   const progress = currentBook?.progress;
   const totalPages = currentBook?.totalPages;
 
+  const maxPages = progress
+    ? Math.max(...progress.map((item) => item.finishPage || 0))
+    : 0;
+
   useEffect(() => {
     if (!progress) return;
-    const maxPage = progress
-      ? Math.max(...progress.map((item) => item.finishPage))
-      : null;
-    if (maxPage && totalPages)
-      setPercentOfReading(Math.floor((maxPage / totalPages) * 100));
-  }, [progress, totalPages]);
 
-  console.log(percentOfReading);
+    if (maxPages && totalPages)
+      setPercentOfReading(+((maxPages / totalPages) * 100).toFixed(1));
+  }, [progress, totalPages, maxPages]);
+  console.log();
+
   return (
     <div>
       <p className="hidden desktop:flex desktop:text-small mb-5">
@@ -26,8 +28,15 @@ const Statistic: FC = () => {
         understanding. By rewriting statistics, we create our own reading
         history.
       </p>
-      <div className=" bg-light-bg-color rounded-md flex flex-col justify-center items-center gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto">
-        {progress && <CircleCharts percentage={percentOfReading} />}
+      <div className=" bg-light-bg-color rounded-md flex flex-col justify-center items-center gap-0.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto">
+        {progress && percentOfReading > 0 && (
+          <CircleCharts percentage={percentOfReading} />
+        )}
+        {maxPages > 0 && (
+          <p className="flex text-tiny mx-auto">
+            {maxPages > 1 ? maxPages : ">1"} pages read
+          </p>
+        )}
       </div>
     </div>
   );

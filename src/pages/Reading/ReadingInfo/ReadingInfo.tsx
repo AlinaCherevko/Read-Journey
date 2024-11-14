@@ -28,7 +28,7 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
   const pagesDone =
     item.finishPage - item.startPage === 0
       ? 1
-      : item.finishPage - item.startPage;
+      : item.finishPage - item.startPage + 1;
 
   const pages = item.finishPage ? pagesDone : null;
 
