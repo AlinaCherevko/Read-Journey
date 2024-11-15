@@ -3,15 +3,17 @@ import FormInput from "../../../components/FormInput/FormInput";
 import Button from "../../../components/Button/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { schemaAddBook } from "../../../schemas/schemas";
+
 import { AddBookValues } from "../../RegisterPage/RegisterForm/types";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import { addOwnBook } from "../../../redux/books/booksOperations";
 import { useTranslation } from "react-i18next";
+import { useSchemaAddBook } from "../../../hooks/schemas";
 
 const AddBookForm: FC = () => {
   const { t } = useTranslation();
+  const schemaAddBook = useSchemaAddBook();
   const dispatch: AppDispatch = useDispatch();
   const {
     register,

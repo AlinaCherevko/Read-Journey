@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { schemaReadingBook } from "../../../schemas/schemas";
 import { ReadBookValues } from "../../RegisterPage/RegisterForm/types";
 import FormInput from "../../../components/FormInput/FormInput";
 import {
@@ -18,9 +17,11 @@ import { AppDispatch } from "../../../redux/store";
 import { toast } from "react-toastify";
 import { CurrentStatus } from "../../../redux/books/types";
 import { useTranslation } from "react-i18next";
+import { useSchemaReadingBook } from "../../../hooks/schemas";
 
 const ReadingForm: FC = () => {
   const { t } = useTranslation();
+  const schemaReadingBook = useSchemaReadingBook();
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [page, setPage] = useState<number | null>(null);
   const error = useSelector(selectBookError);

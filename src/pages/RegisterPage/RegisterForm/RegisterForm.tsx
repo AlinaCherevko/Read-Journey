@@ -3,7 +3,6 @@ import Button from "../../../components/Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "../../../components/FormInput/FormInput";
 import { FormValues } from "./types";
-import { schemaReg } from "../../../schemas/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +11,11 @@ import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSchemaReg } from "../../../hooks/schemas";
 
 const RegisterForm: FC = () => {
   const { t } = useTranslation();
+  const schemaReg = useSchemaReg();
 
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);

@@ -34,7 +34,7 @@ const BookSection: FC = () => {
               {currentBook.author}
             </p>
             <p className="text-tiny text-primary-white mb-5 tablet:mb-8">
-              {currentBook.totalPages} pages
+              {currentBook.totalPages} {t("pages")}
             </p>
             <button>
               <img

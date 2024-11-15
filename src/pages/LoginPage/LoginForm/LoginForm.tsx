@@ -4,7 +4,6 @@ import FormInput from "../../../components/FormInput/FormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginValues } from "../../RegisterPage/RegisterForm/types";
 import { Link } from "react-router-dom";
-import { schemaLog } from "../../../schemas/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
@@ -12,9 +11,11 @@ import { logIn } from "../../../redux/auth/authOperations";
 import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { useSchemaLog } from "../../../hooks/schemas";
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
+  const schemaLog = useSchemaLog();
 
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
