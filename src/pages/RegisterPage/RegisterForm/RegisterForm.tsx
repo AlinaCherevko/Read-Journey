@@ -11,8 +11,11 @@ import { signup } from "../../../redux/auth/authOperations";
 import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const RegisterForm: FC = () => {
+  const { t } = useTranslation();
+
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const error = useSelector(selectError);
   const dispatch: AppDispatch = useDispatch();
@@ -50,35 +53,35 @@ const RegisterForm: FC = () => {
         <FormInput
           success={isNameValid}
           error={errors.name}
-          placeholder="Enter text"
+          placeholder={t("Enter text")}
           label="name"
-          text="Name:"
+          text={t("Name")}
           register={register}
         />
         <FormInput
           success={isEmailValid}
           error={errors.email}
-          placeholder="Enter text"
+          placeholder={t("Enter text")}
           label="email"
-          text="Mail:"
+          text={t("Mail")}
           register={register}
         />
         <FormInput
           success={isPasswordValid}
           error={errors.password}
-          placeholder="Enter text"
+          placeholder={t("Enter text")}
           label="password"
-          text="Password:"
+          text={t("Password")}
           register={register}
         />
       </div>
       <div className="flex items-center gap-3.5 tablet:gap-5">
-        <Button text="Registration" type="submit" />
+        <Button text={t("Registrations")} type="submit" />
         <Link
           to={"/login"}
           className="text-lightSmall tablet:text-small underline cursor-pointer hover:text-primary-white"
         >
-          Already have an account ?
+          {t("Already have an account")}
         </Link>
       </div>
     </form>

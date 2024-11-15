@@ -1,8 +1,8 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import LngDetector from "i18next-browser-languagedetector";
-import translationEN from "./en/translation.json";
-import translationUK from "./uk/translation.json";
+import translationEN from "./text/en/translation.json";
+import translationUK from "./text/uk/translation.json";
 
 i18next
   .use(initReactI18next)

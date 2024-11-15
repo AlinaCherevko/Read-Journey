@@ -11,8 +11,11 @@ import { AppDispatch } from "../../../redux/store";
 import { logIn } from "../../../redux/auth/authOperations";
 import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const LoginForm: FC = () => {
+  const { t } = useTranslation();
+
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const error = useSelector(selectError);
@@ -49,27 +52,27 @@ const LoginForm: FC = () => {
         <FormInput
           success={isEmailValid}
           error={errors.email}
-          placeholder="Enter text"
+          placeholder={t("Enter text")}
           label="email"
-          text="Mail:"
+          text={t("Mail")}
           register={register}
         />
         <FormInput
           success={isPasswordValid}
           error={errors.password}
-          placeholder="Enter text"
+          placeholder={t("Enter text")}
           label="password"
-          text="Password:"
+          text={t("Password")}
           register={register}
         />
       </div>
       <div className="flex items-center gap-3.5 tablet:gap-5">
-        <Button text="Log In" type="submit" />
+        <Button text={t("Log in")} type="submit" />
         <Link
           to={"/register"}
           className="text-lightSmall tablet:text-small underline cursor-pointer hover:text-primary-white"
         >
-          Don't have an account ?
+          {t("Don't have an account")}
         </Link>
       </div>
     </form>
