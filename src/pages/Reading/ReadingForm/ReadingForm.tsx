@@ -17,8 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { toast } from "react-toastify";
 import { CurrentStatus } from "../../../redux/books/types";
+import { useTranslation } from "react-i18next";
 
 const ReadingForm: FC = () => {
+  const { t } = useTranslation();
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [page, setPage] = useState<number | null>(null);
   const error = useSelector(selectBookError);
@@ -64,7 +66,7 @@ const ReadingForm: FC = () => {
   const onSubmit: SubmitHandler<ReadBookValues> = (data) => {
     setIsFirstRender(false);
     if (currentBook && data.pages > currentBook?.totalPages) {
-      toast.error("You've exceed the total pages of the book!");
+      toast.error(t("exceed_total_pages"));
       reset();
       return;
     }
@@ -76,7 +78,7 @@ const ReadingForm: FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
       <FormInput
-        text="Page number:"
+        text={t("Page number")}
         label="pages"
         placeholder="0"
         error={errors.pages}
@@ -84,7 +86,7 @@ const ReadingForm: FC = () => {
       />
       <Button
         type="submit"
-        text={status === CurrentStatus.ACTIVE ? "To stop" : "To start"}
+        text={status === CurrentStatus.ACTIVE ? t("To stop") : t("To start")}
       />
     </form>
   );

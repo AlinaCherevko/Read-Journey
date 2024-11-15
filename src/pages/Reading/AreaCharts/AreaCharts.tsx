@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { AreaChart, Area } from "recharts";
 import { InfoProps } from "../ReadingInfo/ReadingInfo";
 
@@ -26,4 +26,4 @@ const AreaCharts: FC<InfoProps> = ({ item }) => {
   );
 };
 
-export default AreaCharts;
+export default memo(AreaCharts);

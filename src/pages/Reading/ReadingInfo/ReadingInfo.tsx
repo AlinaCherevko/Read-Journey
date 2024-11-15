@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { IProgress } from "../../../redux/books/types";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentBook } from "../../../redux/books/booksSelectors";
@@ -6,12 +6,14 @@ import Icon from "../../../components/Icon/Icon";
 import { deleteSession } from "../../../redux/books/booksOperations";
 import { AppDispatch } from "../../../redux/store";
 import AreaCharts from "../AreaCharts/AreaCharts";
+import { useTranslation } from "react-i18next";
 
 export type InfoProps = {
   item: IProgress;
 };
 
 const ReadingInfo: FC<InfoProps> = ({ item }) => {
+  const { t } = useTranslation();
   const currentBook = useSelector(selectCurrentBook);
   const dispatch: AppDispatch = useDispatch();
   const startReadingData = new Date(item.startReading);
@@ -40,10 +42,10 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
 
   const readingTime =
     duration < 1000 * 60
-      ? ">1 minute"
-      : `${days ? `${days} days, ` : ""}${
-          hours ? `${hours} hours, ` : ""
-        }${minutes} minutes`;
+      ? `< 1 ${t("minutes")}`
+      : `${days ? `${days} ${t("days")}, ` : ""}${
+          hours ? `${hours} ${t("hours")}, ` : ""
+        }${minutes} ${t("minutes")}`;
 
   const speed = item.speed === 0 ? "< 1" : item.speed;
 
@@ -72,10 +74,16 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
       </div>
       <div className="flex w-[82px]">
         <div className="flex flex-col justify-between">
-          {pages && <p className="text-lightSmall">{pages} pages</p>}
+          {pages && (
+            <p className="text-lightSmall">
+              {pages} {t("pages")}
+            </p>
+          )}
           <AreaCharts item={item} />
           {(item.speed || item.speed === 0) && (
-            <p className="text-tiny">{speed} pages per hour</p>
+            <p className="text-tiny">
+              {speed} {t("pages per hour")}
+            </p>
           )}
         </div>
         <button onClick={handleDeleteReadingSession}>
@@ -92,4 +100,4 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
   );
 };
 
-export default ReadingInfo;
+export default memo(ReadingInfo);

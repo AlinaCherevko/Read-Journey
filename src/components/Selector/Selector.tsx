@@ -2,13 +2,15 @@ import { FC } from "react";
 import Select from "react-select";
 import { ISelect, Option } from "./types";
 import { useSelectStyles } from "../../hooks/hooks";
+import { useTranslation } from "react-i18next";
 
 const SelectEl: FC<ISelect> = ({ onChange }) => {
+  const { t } = useTranslation();
   const options = [
-    { value: "all", label: "Show all" },
-    { value: "unread", label: "Unread" },
-    { value: "in-progress", label: "In progress" },
-    { value: "done", label: "Done" },
+    { value: "all", label: t("Show all") },
+    { value: "unread", label: t("Unread") },
+    { value: "in-progress", label: t("Inprogress") },
+    { value: "done", label: t("Done") },
   ];
 
   const onSelectChange = (newValue: unknown) => {
@@ -31,7 +33,7 @@ const SelectEl: FC<ISelect> = ({ onChange }) => {
         onChange={onSelectChange}
         name="type"
         options={options}
-        placeholder="All books"
+        placeholder={t("All books")}
         styles={useSelectStyles()}
       />
     </div>

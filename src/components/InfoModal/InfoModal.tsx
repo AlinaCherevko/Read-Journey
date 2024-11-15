@@ -8,8 +8,10 @@ import {
   getCurrentBook,
 } from "../../redux/books/booksOperations";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,19 +40,19 @@ const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
       </h3>
       <p className="text-lightSmall mb-1 tablet:text-small">{result.author}</p>
       <p className="text-tiny text-primary-white mb-5 tablet:mb-8">
-        {result.totalPages} pages
+        {result.totalPages} {t("pages")}
       </p>
       {!isInLibrary && (
         <Button
           type="button"
-          text="Add to library"
+          text={t("Add to library")}
           onClick={addToLibraryHandler}
         />
       )}
       {pageName === "library" && (
         <Button
           type="button"
-          text="Start reading"
+          text={t("Start reading")}
           onClick={handleStartReadingBook}
         />
       )}

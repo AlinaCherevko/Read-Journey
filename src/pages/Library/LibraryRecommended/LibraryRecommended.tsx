@@ -2,17 +2,20 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectRecommendedBooks } from "../../../redux/books/booksSelectors";
+import { useTranslation } from "react-i18next";
+import { IBook } from "../../../redux/books/types";
 
 const LibraryRecommended: FC = () => {
+  const { t } = useTranslation();
   const recommendedBooks = useSelector(selectRecommendedBooks);
   const booksToShow = recommendedBooks.results.slice(0, 3);
   return (
     <div className="bg-light-bg-color rounded-md p-5 ">
       <h2 className="text-mediumSmall text-primary-white font-bold mb-3.5 tablet:mb-5 tablet:text-lightMedium">
-        Recommended books
+        {t("Recommended books")}
       </h2>
       <ul className="flex justify-between mobileAdaptive:gap-5 mb-4">
-        {booksToShow.map((item) => (
+        {booksToShow.map((item: IBook) => (
           <li
             key={item._id}
             className="w-[60px] flex flex-col h-min-[141px] mobileAdaptive:w-[71px] "
@@ -35,7 +38,7 @@ const LibraryRecommended: FC = () => {
         className="text-small underline cursor-pointer hover:text-primary-white"
         to={"/"}
       >
-        Home
+        {t("home")}
       </Link>
     </div>
   );

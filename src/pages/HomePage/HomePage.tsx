@@ -7,6 +7,7 @@ import {
   getUsersBooks,
 } from "../../redux/books/booksOperations";
 import BooksSection from "./RecommendedBooks/RecommendedBooks";
+import { useTranslation } from "react-i18next";
 
 const HomePage: FC = () => {
   const [page, setPage] = useState(1);
@@ -15,6 +16,7 @@ const HomePage: FC = () => {
   const pageName = "home";
 
   const dispatch: AppDispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(getUsersBooks());
@@ -35,7 +37,7 @@ const HomePage: FC = () => {
           <BooksSection
             setPage={setPage}
             page={page}
-            title="Recommended books"
+            title={t("Recommended books")}
             pageName={pageName}
           />
         </div>

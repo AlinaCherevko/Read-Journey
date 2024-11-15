@@ -4,6 +4,7 @@ export interface IBooksState {
   currentBook: IBookLibrary | null;
   error: string | undefined;
   isLoading: boolean;
+  isRefreshing: boolean;
 }
 
 export interface IBook {

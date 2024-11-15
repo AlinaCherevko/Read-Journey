@@ -2,8 +2,10 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentBook } from "../../../redux/books/booksSelectors";
 import { CurrentStatus } from "../../../redux/books/types";
+import { useTranslation } from "react-i18next";
 
 const BookSection: FC = () => {
+  const { t } = useTranslation();
   const currentBook = useSelector(selectCurrentBook);
   const status =
     currentBook?.progress?.[currentBook.progress.length - 1]?.status;
@@ -12,7 +14,7 @@ const BookSection: FC = () => {
     <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
       <div className="">
         <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
-          My reading
+          {t("reading")}
         </h1>
         {currentBook && (
           <div className="mt-10 tablet:mt-8 text-center desktop:mt-11">

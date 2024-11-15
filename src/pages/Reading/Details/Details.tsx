@@ -1,8 +1,11 @@
 import { FC, useState } from "react";
 import Diary from "../Diary/Diary";
 import Statistic from "../Statistic/Statistic";
+import { useTranslation } from "react-i18next";
 
 const Details: FC = () => {
+  const { t } = useTranslation();
+
   const [activeTab, setActiveTab] = useState<"Diary" | "Statistic">("Diary");
 
   const handleTabChange = (tab: "Diary" | "Statistic") => {
@@ -20,7 +23,7 @@ const Details: FC = () => {
           }
           onClick={() => handleTabChange("Diary")}
         >
-          Diary
+          {t("Diary")}
         </a>
         <a
           className={
@@ -30,7 +33,7 @@ const Details: FC = () => {
           }
           onClick={() => handleTabChange("Statistic")}
         >
-          Statistic
+          {t("Statistics")}
         </a>
       </div>
       {activeTab === "Diary" && <Diary />}

@@ -22,6 +22,7 @@ const initialState: IBooksState = {
   inLibrary: [],
   error: "",
   isLoading: false,
+  isRefreshing: false,
 };
 
 const isPending = (state: IBooksState) => {

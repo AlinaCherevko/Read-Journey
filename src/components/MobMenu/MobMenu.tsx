@@ -5,6 +5,7 @@ import { logOut } from "../../redux/auth/authOperations";
 import { AppDispatch } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import NavTab from "../NavTab/NavTab";
+import { useTranslation } from "react-i18next";
 
 interface MenuProps {
   onClose: () => void;
@@ -12,6 +13,8 @@ interface MenuProps {
 
 const MobMenu: FC<MenuProps> = ({ onClose }) => {
   const dispatch: AppDispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -21,10 +24,10 @@ const MobMenu: FC<MenuProps> = ({ onClose }) => {
     <div className="p-10 bg-light-bg-color flex flex-col justify-between menu">
       <CloseBtn onClose={onClose} />
       <div className="flex flex-col gap-5">
-        <NavTab to="/" text="Home" />
-        <NavTab to="/library" text="My library" />
+        <NavTab to="/" text={t("home")} />
+        <NavTab to="/library" text={t("library")} />
       </div>
-      <Button type="button" text="Log out" onClick={handleLogout} />
+      <Button type="button" text={t("Log out")} onClick={handleLogout} />
     </div>
   );
 };

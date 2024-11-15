@@ -8,8 +8,10 @@ import { AddBookValues } from "../../RegisterPage/RegisterForm/types";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import { addOwnBook } from "../../../redux/books/booksOperations";
+import { useTranslation } from "react-i18next";
 
 const AddBookForm: FC = () => {
+  const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const {
     register,
@@ -23,7 +25,6 @@ const AddBookForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<AddBookValues> = (data) => {
-    console.log(data);
     dispatch(
       addOwnBook({
         title: data.title,
@@ -44,19 +45,19 @@ const AddBookForm: FC = () => {
       className="flex flex-col gap-3 tablet:gap-3.5"
     >
       <span className="text-tiny text-primary-white ml-3.5 tablet:text-small">
-        Create your library:
+        {t("Create your library")}
       </span>
       <FormInput
-        placeholder="Enter text"
-        text="Book title:"
+        placeholder={t("Enter text")}
+        text={t("Book title:")}
         error={errors.title}
         label="title"
         register={register}
         success={isTitleValid}
       />
       <FormInput
-        placeholder="Enter text"
-        text="The author:"
+        placeholder={t("Enter text")}
+        text={t("Book author:")}
         error={errors.author}
         label="author"
         register={register}
@@ -64,13 +65,13 @@ const AddBookForm: FC = () => {
       />
       <FormInput
         placeholder="0"
-        text="Number of pages:"
+        text={t("Number of pages:")}
         error={errors.pages}
         label="pages"
         register={register}
         success={isPagesValid}
       />
-      <Button text="Add book" type="submit" />
+      <Button text={t("Add book")} type="submit" />
     </form>
   );
 };

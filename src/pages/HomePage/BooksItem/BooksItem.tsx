@@ -7,13 +7,16 @@ import { selectLibrariesBooks } from "../../../redux/books/booksSelectors";
 import Icon from "../../../components/Icon/Icon";
 import { AppDispatch } from "../../../redux/store";
 import { deleteFromLibrary } from "../../../redux/books/booksOperations";
+import { IBookLibrary } from "../../../redux/books/types";
 
 const BooksItem: FC<BookProps> = ({ result, pageName }) => {
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
   const inLibrary = useSelector(selectLibrariesBooks);
   const dispatch: AppDispatch = useDispatch();
 
-  const isInLibrary = inLibrary.some((book) => book.title === result.title);
+  const isInLibrary = inLibrary.some(
+    (book: IBookLibrary) => book.title === result.title
+  );
 
   const handleDeleteFromLibrary = () => {
     dispatch(deleteFromLibrary({ id: result._id }));

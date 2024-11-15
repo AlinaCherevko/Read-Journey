@@ -29,13 +29,14 @@ const BooksSection: FC<RecBooksProps> = ({
   const isLoading = useSelector(selectBooksLoading);
   const [value, setValue] = useState<string>("");
   const [filteredItems, setFilteredItems] = useState<IBookLibrary[]>([]);
-  console.log(inLibrary);
   const libraryItems = value ? filteredItems : inLibrary;
 
   const items = pageName === "home" ? results : libraryItems;
 
   useEffect(() => {
-    setFilteredItems(inLibrary.filter((item) => item.status === value));
+    setFilteredItems(
+      inLibrary.filter((item: IBookLibrary) => item.status === value)
+    );
   }, [value, inLibrary]);
 
   return (

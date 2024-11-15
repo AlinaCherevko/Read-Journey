@@ -2,23 +2,26 @@ import { FC } from "react";
 import Input from "../FilterInput/FilterInput";
 import { DashBoardProps } from "./types";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-gray-bg-color w-full rounded-lg p-5 tablet:p-8 desktop:p-5 desktop:pt-10 desktop:w-[353px]">
       <span className="text-tiny text-primary-white mb-5 ml-3.5 tablet:text-small">
-        Filters:
+        {t("filters")}
       </span>
       <div className="flex flex-col gap-3 tablet:gap-3.5 mb-5">
         <Input
-          placeholder="Enter text"
-          text="Book title:"
+          placeholder={t("Enter text")}
+          text={t("Book title:")}
           setOption={setTitle}
           setPage={setPage}
         />
         <Input
-          placeholder="Enter text"
-          text="The author:"
+          placeholder={t("Enter text")}
+          text={t("Book author:")}
           setOption={setAuthor}
           setPage={setPage}
         />
@@ -26,7 +29,7 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
 
       <div className="p-5 bg-light-bg-color rounded-md">
         <h2 className="text-mediumSmall text-primary-white font-bold mb-5 desktop:mb-10">
-          Start your workout
+          {t("Start your workout")}
         </h2>
         <ul className="flex flex-col gap-5 mb-5">
           <li className="flex gap-3.5">
@@ -35,10 +38,10 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
             </div>
             <div>
               <span className="text-primary-white text-small">
-                Create a personal library:{" "}
+                {t("Create a personal library")}
               </span>
               <p className="text-small">
-                add the books you intend to read to it.
+                {t("Add the books you intend to read it")}
               </p>
             </div>
           </li>
@@ -48,10 +51,10 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
             </div>
             <div>
               <span className="text-primary-white text-small">
-                Create your first workout:{" "}
+                {t("Create your first workout")}
               </span>
               <p className="text-small">
-                define a goal, choose a period, start training.
+                {t("Define a goal, choose a period, start training")}
               </p>
             </div>
           </li>
@@ -60,15 +63,15 @@ const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
           className="text-small underline cursor-pointer hover:text-primary-white"
           to={"/library"}
         >
-          My library
+          {t("library")}
         </Link>
       </div>
       <div className="hidden desktop:flex gap-3.5 bg-light-bg-color mt-5 p-5 rounded-md">
         <img src="/books.png" alt="book-q" />
         <div className="text-small items-center">
-          "Books are{" "}
-          <span className="text-small text-primary-white">windows </span>to the
-          world, and reading is a journey into the unknown."
+          {t("Books are")} {""}
+          <span className="text-small text-primary-white">{t("windows")} </span>
+          {t("to the world, and reading is a journey into the unknown")}
         </div>
       </div>
     </div>
