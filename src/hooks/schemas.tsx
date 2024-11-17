@@ -69,7 +69,6 @@ export const useSchemaReadingBook = () => {
         .number()
         .required(t("pages_required"))
         .typeError(t("pages_error")),
-      //transform((value, originalValue) => (originalValue === null ? 0 : value))
     })
     .required();
 };

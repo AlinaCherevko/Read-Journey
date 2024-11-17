@@ -12,4 +12,5 @@ export type InputProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
   error: FieldError | undefined;
   success?: boolean | string | number;
+  type?: string;
 };

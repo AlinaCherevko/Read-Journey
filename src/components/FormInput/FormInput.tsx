@@ -1,5 +1,6 @@
 import { FieldValues } from "react-hook-form";
 import { InputProps } from "../FilterInput/types";
+import { useTranslation } from "react-i18next";
 
 const FormInput = <T extends FieldValues>({
   placeholder,
@@ -8,7 +9,9 @@ const FormInput = <T extends FieldValues>({
   label,
   error,
   success,
+  type,
 }: InputProps<T>) => {
+  const { t } = useTranslation();
   return (
     <div className="relative">
       <div className="bg-light-bg-color px-3.5 py-3.5 rounded-md">
@@ -26,7 +29,7 @@ const FormInput = <T extends FieldValues>({
       )}
       {success && (
         <p className="absolute text-tiny text-green-success-color tablet:text-lightSmall">
-          Valid {label}
+          {t("valid")} {type}
         </p>
       )}
     </div>

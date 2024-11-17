@@ -5,17 +5,20 @@ import { useTranslation } from "react-i18next";
 
 const LangSwitcher: FC = () => {
   const [language, setLanguage] = useState<string | null>(
-    localStorage.getItem("i18nextLng")
+    localStorage.getItem("i18nextLng") || null
   );
   const { i18n } = useTranslation();
+  console.log(language);
 
   const handleSwitch = (e: SwitchCheckedChangeDetails) => {
     setLanguage(e.checked ? "uk" : "en");
-    // i18n.changeLanguage(language);
   };
 
   useEffect(() => {
-    if (language) i18n.changeLanguage(language);
+    if (language) {
+      i18n.changeLanguage(language);
+      localStorage.setItem("i18nextLng", language);
+    }
   }, [language, i18n]);
   return (
     <>

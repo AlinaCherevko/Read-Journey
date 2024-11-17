@@ -8,8 +8,10 @@ i18next
   .use(initReactI18next)
   .use(LngDetector)
   .init({
-    lng: "en",
+    lng: localStorage.getItem("i18nextLng") || "en",
+    // lng: "en",
     fallbackLng: "en",
+    supportedLngs: ["en", "uk"],
     detection: {
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],

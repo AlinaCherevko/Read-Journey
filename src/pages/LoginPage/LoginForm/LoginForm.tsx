@@ -57,6 +57,7 @@ const LoginForm: FC = () => {
           label="email"
           text={t("Mail")}
           register={register}
+          type={t("email")}
         />
         <FormInput
           success={isPasswordValid}
@@ -65,6 +66,7 @@ const LoginForm: FC = () => {
           label="password"
           text={t("Password")}
           register={register}
+          type={t("password")}
         />
       </div>
       <div className="flex items-center gap-3.5 tablet:gap-5">

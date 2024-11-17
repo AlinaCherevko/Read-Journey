@@ -64,5 +64,9 @@
   "title_error": "Title is required",
   "author_error": "Author is required",
   "pages_error": "Pages must be a number",
-  "pages_required": "Pages are required"
+  "pages_required": "Pages are required",
+  "email": "email",
+  "password": "password",
+  "name": "name",
+  "valid": "Valid"
 }
