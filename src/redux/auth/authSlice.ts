@@ -30,7 +30,7 @@ const handleAuthRejected = (
   action: PayloadAction<string | undefined>
 ) => {
   state.isAuthLoading = false;
-  state.error = state.isRefreshingToken === true ? "" : action.payload;
+  state.error = action.payload;
 };
 
 export const authSlice = createSlice({
