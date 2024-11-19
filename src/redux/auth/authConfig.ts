@@ -29,21 +29,25 @@ instance.interceptors.response.use(
     return response;
   },
   async (error) => {
+    const state = store.getState() as RootState;
+    const isRefreshingToken = state.auth.isRefreshingToken;
+
     if (error.response.status === 401 && !error.config._retry) {
       error.config._retry = true;
 
-      try {
-        store.dispatch(refreshCurrentUser());
-        const token = store.getState().auth.token;
-        error.config.headers["Authorization"] = `Bearer ${token}`;
+      if (!isRefreshingToken) {
+        try {
+          store.dispatch(refreshCurrentUser());
+          const token = store.getState().auth.token;
+          error.config.headers["Authorization"] = `Bearer ${token}`;
 
-        return instance(error.config);
-      } catch (err) {
-        //console.log(err);
-        return Promise.reject(err);
+          return instance(error.config);
+        } catch (err) {
+          //console.log(err);
+          return Promise.reject(err);
+        }
       }
     }
-
     return Promise.reject(error);
   }
 );

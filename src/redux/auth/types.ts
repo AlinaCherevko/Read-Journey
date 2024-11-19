@@ -4,6 +4,7 @@ export interface IState {
   refreshToken: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
+  isRefreshingToken: boolean;
   isAuthLoading: boolean;
   error: string | null | unknown;
 }

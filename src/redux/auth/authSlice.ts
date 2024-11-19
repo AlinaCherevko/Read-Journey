@@ -16,6 +16,7 @@ const initialState: IState = {
   isLoggedIn: false,
   isRefreshing: false,
   isAuthLoading: false,
+  isRefreshingToken: false,
   error: "",
 };
 
@@ -29,7 +30,7 @@ const handleAuthRejected = (
   action: PayloadAction<string | undefined>
 ) => {
   state.isAuthLoading = false;
-  state.error = action.payload;
+  state.error = state.isRefreshingToken === true ? "" : action.payload;
 };
 
 export const authSlice = createSlice({
@@ -93,9 +94,14 @@ export const authSlice = createSlice({
     });
 
     //refresh
+    builder.addCase(refreshCurrentUser.pending, (state) => {
+      state.isRefreshingToken = true;
+      state.error = "";
+    });
     builder.addCase(refreshCurrentUser.fulfilled, (state, { payload }) => {
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
+      state.isRefreshingToken = false;
       state.isLoggedIn = true;
       state.error = "";
     });

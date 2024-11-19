@@ -12,6 +12,7 @@ import {
   addOwnBook,
 } from "./booksOperations";
 import { IBooksState } from "./types";
+//import { RootState, store } from "../store";
 
 const initialState: IBooksState = {
   recommended: {
@@ -34,6 +35,10 @@ const isRejected = (
   state: IBooksState,
   action: PayloadAction<string | undefined>
 ) => {
+  //const authState = store.getState() as RootState;
+  //const isRefreshingToken = authState.auth.isRefreshing;
+
+  // state.error = isRefreshingToken === true ? "" : action.payload;
   state.error = action.payload;
   state.isLoading = false;
 };

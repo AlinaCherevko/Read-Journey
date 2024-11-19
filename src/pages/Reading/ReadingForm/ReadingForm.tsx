@@ -18,10 +18,12 @@ import { toast } from "react-toastify";
 import { CurrentStatus } from "../../../redux/books/types";
 import { useTranslation } from "react-i18next";
 import { useSchemaReadingBook } from "../../../hooks/schemas";
+import { selectIsRefreshingToken } from "../../../redux/auth/authSelectors";
 
 const ReadingForm: FC = () => {
   const { t } = useTranslation();
   const schemaReadingBook = useSchemaReadingBook();
+  const isTokenRefreshing = useSelector(selectIsRefreshingToken);
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [page, setPage] = useState<number | null>(null);
   const error = useSelector(selectBookError);
@@ -29,15 +31,17 @@ const ReadingForm: FC = () => {
   const status =
     currentBook?.progress?.[currentBook.progress.length - 1]?.status;
   const dispatch: AppDispatch = useDispatch();
+  console.log(error);
+  console.log(isTokenRefreshing);
 
   useEffect(() => {
-    if (!isFirstRender) {
-      if (error) {
-        toast.error(error);
-        return;
-      }
+    if (isFirstRender) return;
+    if (isTokenRefreshing && error === "Unauthorized") return;
+
+    if (error && error !== "Unauthorized") {
+      toast.error(error);
     }
-  }, [error, isFirstRender]);
+  }, [error, isFirstRender, isTokenRefreshing]);
 
   useEffect(() => {
     if (currentBook && page !== null) {
