@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, useEffect } from "react";
 import MainLayout from "./components/MainLayout/MainLayout";
 import Loader from "./components/Loader/Loader";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
@@ -32,53 +32,51 @@ function App() {
   return isRefreshing ? (
     <Loader />
   ) : (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route
-            index
-            element={
-              <PrivateRoute>
-                <HomePage />
-              </PrivateRoute>
-            }
-          />
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route
+          index
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
 
-          <Route
-            path="/library"
-            element={
-              <PrivateRoute>
-                <Library />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reading"
-            element={
-              <PrivateRoute>
-                <Reading />
-              </PrivateRoute>
-            }
-          />
-        </Route>
         <Route
-          path="/register"
+          path="library"
           element={
-            <RestrictedRoute>
-              <RegisterPage />
-            </RestrictedRoute>
+            <PrivateRoute>
+              <Library />
+            </PrivateRoute>
           }
         />
         <Route
-          path="/login"
+          path="reading"
           element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
+            <PrivateRoute>
+              <Reading />
+            </PrivateRoute>
           }
         />
-      </Routes>
-    </Suspense>
+      </Route>
+      <Route
+        path="register"
+        element={
+          <RestrictedRoute>
+            <RegisterPage />
+          </RestrictedRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <RestrictedRoute>
+            <LoginPage />
+          </RestrictedRoute>
+        }
+      />
+    </Routes>
   );
 }
 

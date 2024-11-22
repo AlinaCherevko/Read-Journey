@@ -15,7 +15,7 @@ export type RecBooksProps = {
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   page?: number;
   title: string;
-  pageName: "home" | "library" | "reading" | undefined;
+  pageName: "home" | "library" | "reading";
 };
 
 const BooksSection: FC<RecBooksProps> = ({

@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const MainLayout: FC = () => {
   return (
@@ -9,7 +10,9 @@ const MainLayout: FC = () => {
         <Header />
       </header>
       <main>
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );
