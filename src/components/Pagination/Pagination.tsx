@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
-import { toast } from "react-toastify";
 
 type PaginationProps = {
   setPage: React.Dispatch<React.SetStateAction<number>>;
@@ -13,7 +12,6 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
 
   const handleNextBtnClick = () => {
     if (page === totalPages) {
-      toast.info("You've reached the last page");
       return;
     }
     setPage((prevPage) => prevPage + 1);
@@ -21,7 +19,6 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
 
   const handlePrevBtnClick = () => {
     if (page === 1) {
-      toast.info("No more pages previously");
       return;
     }
 
@@ -33,13 +30,22 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
       <button
         disabled={page === 1}
         onClick={handlePrevBtnClick}
-        className="w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white"
+        className={`w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white hover:border-primary-white ${
+          page === 1
+            ? "hover:border-main-border-color hover:text-main-text-color cursor-default"
+            : ""
+        }`}
       >
         <span>&lt;</span>
       </button>
       <button
+        disabled={page === totalPages}
         onClick={handleNextBtnClick}
-        className="w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white"
+        className={`w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white hover:border-primary-white ${
+          page === totalPages
+            ? "hover:border-main-border-color hover:text-main-text-color cursor-default"
+            : ""
+        }`}
       >
         <span>&gt;</span>
       </button>

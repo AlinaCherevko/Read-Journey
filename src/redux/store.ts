@@ -22,7 +22,7 @@ const authPersistConfig = {
 const booksPersistConfig = {
   key: "books",
   storage,
-  whitelist: ["currentBook"],
+  whitelist: ["currentBook", "recommended"],
 };
 
 const rootReducer = combineReducers({
