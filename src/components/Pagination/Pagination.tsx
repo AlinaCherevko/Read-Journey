@@ -9,7 +9,10 @@ type PaginationProps = {
 
 const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   const { totalPages } = useSelector(selectRecommendedBooks);
-  console.log(totalPages);
+  const isNextPageDisabled =
+    page === totalPages || totalPages === 1 || !totalPages;
+
+  const isPreviousPageDisabled = page === 1 || totalPages === 1 || !totalPages;
 
   const handleNextBtnClick = () => {
     if (page === totalPages) {
@@ -29,21 +32,21 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   return (
     <div className="flex gap-2">
       <button
+        disabled={isPreviousPageDisabled}
         onClick={handlePrevBtnClick}
         className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
-          page === 1 || totalPages === 1 || !totalPages
-            ? "border-main-text-color text-main-text-color cursor-default"
-            : ""
+          isPreviousPageDisabled &&
+          "border-main-text-color text-main-text-color cursor-default"
         }`}
       >
         <span>&lt;</span>
       </button>
       <button
+        disabled={isNextPageDisabled}
         onClick={handleNextBtnClick}
         className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
-          page === totalPages || totalPages === 1 || !totalPages
-            ? "border-main-text-color text-main-text-color cursor-default"
-            : ""
+          isNextPageDisabled &&
+          "border-main-text-color text-main-text-color cursor-default"
         }`}
       >
         <span>&gt;</span>
