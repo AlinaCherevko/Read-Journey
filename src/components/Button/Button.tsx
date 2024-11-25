@@ -1,5 +1,10 @@
 import { FC } from "react";
-import { ButtonProps } from "./types";
+
+export type ButtonProps = {
+  text: string;
+  type: "button" | "submit" | "reset";
+  onClick?: () => void;
+};
 
 const Button: FC<ButtonProps> = ({ text, type, onClick }) => {
   return (

@@ -1,13 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import {
-  selectBooksLoading,
   selectLibrariesBooks,
   selectRecommendedBooks,
 } from "../../../redux/books/booksSelectors";
 import { useSelector } from "react-redux";
 import BooksList from "../BooksList/BooksList";
 import Pagination from "../../../components/Pagination/Pagination";
-import Loader from "../../../components/Loader/Loader";
+// import Loader from "../../../components/Loader/Loader";
 import { IBookLibrary } from "../../../redux/books/types";
 import Selector from "../../../components/Selector/Selector";
 
@@ -25,19 +24,18 @@ const BooksSection: FC<RecBooksProps> = ({
   pageName,
 }) => {
   const { results } = useSelector(selectRecommendedBooks);
-  const inLibrary = useSelector(selectLibrariesBooks);
-  const isLoading = useSelector(selectBooksLoading);
+  const booksInLibrary = useSelector(selectLibrariesBooks);
   const [value, setValue] = useState<string>("");
   const [filteredItems, setFilteredItems] = useState<IBookLibrary[]>([]);
-  const libraryItems = value ? filteredItems : inLibrary;
+  const libraryItems = value ? filteredItems : booksInLibrary;
 
   const items = pageName === "home" ? results : libraryItems;
 
   useEffect(() => {
     setFilteredItems(
-      inLibrary.filter((item: IBookLibrary) => item.status === value)
+      booksInLibrary.filter((item: IBookLibrary) => item.status === value)
     );
-  }, [value, inLibrary]);
+  }, [value, booksInLibrary]);
 
   return (
     <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
@@ -50,9 +48,7 @@ const BooksSection: FC<RecBooksProps> = ({
         )}
         {pageName === "library" && <Selector onChange={setValue} />}
       </div>
-      {isLoading ? (
-        <Loader />
-      ) : items && items.length > 0 ? (
+      {items && items.length > 0 ? (
         <BooksList results={items} pageName={pageName} />
       ) : (
         <p>Haven't found any book</p>

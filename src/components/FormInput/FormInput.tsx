@@ -1,6 +1,20 @@
-import { FieldValues } from "react-hook-form";
-import { InputProps } from "../FilterInput/types";
 import { useTranslation } from "react-i18next";
+import {
+  UseFormRegister,
+  Path,
+  FieldError,
+  FieldValues,
+} from "react-hook-form";
+
+export type InputProps<T extends FieldValues> = {
+  placeholder: string;
+  text: string;
+  label: Path<T>;
+  register: UseFormRegister<T>;
+  error: FieldError | undefined;
+  success?: boolean | string | number;
+  type?: string;
+};
 
 const FormInput = <T extends FieldValues>({
   placeholder,

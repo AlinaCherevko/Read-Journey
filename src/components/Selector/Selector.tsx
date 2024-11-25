@@ -1,8 +1,13 @@
 import { FC } from "react";
 import Select from "react-select";
-import { ISelect, Option } from "./types";
 import { useSelectStyles } from "../../hooks/hooks";
 import { useTranslation } from "react-i18next";
+
+export type Option = { value: string; label: string };
+
+export type ISelect = {
+  onChange: (value: string) => void;
+};
 
 const SelectEl: FC<ISelect> = ({ onChange }) => {
   const { t } = useTranslation();

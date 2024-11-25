@@ -20,7 +20,7 @@ const initialState: IBooksState = {
     totalPages: 0,
   },
   currentBook: null,
-  inLibrary: [],
+  booksInLibrary: [],
   error: "",
   isLoading: false,
   isRefreshing: false,
@@ -35,10 +35,6 @@ const isRejected = (
   state: IBooksState,
   action: PayloadAction<string | undefined>
 ) => {
-  //const authState = store.getState() as RootState;
-  //const isRefreshingToken = authState.auth.isRefreshing;
-
-  // state.error = isRefreshingToken === true ? "" : action.payload;
   state.error = action.payload;
   state.isLoading = false;
 };
@@ -47,7 +43,11 @@ export const booksSlice = createSlice({
   name: "books",
   initialState,
 
-  reducers: {},
+  reducers: {
+    resetBooksInLibrary: (state) => {
+      state.booksInLibrary = [];
+    },
+  },
   extraReducers(builder) {
     //getRecommendedBooks
     builder.addCase(getRecommendedBooks.pending, isPending);
@@ -62,7 +62,7 @@ export const booksSlice = createSlice({
     builder.addCase(addToLibrary.pending, isPending);
     builder.addCase(addToLibrary.rejected, isRejected);
     builder.addCase(addToLibrary.fulfilled, (state, { payload }) => {
-      state.inLibrary.push(payload);
+      state.booksInLibrary.push(payload);
       state.error = "";
       state.isLoading = false;
     });
@@ -71,7 +71,7 @@ export const booksSlice = createSlice({
     builder.addCase(deleteFromLibrary.pending, isPending);
     builder.addCase(deleteFromLibrary.rejected, isRejected);
     builder.addCase(deleteFromLibrary.fulfilled, (state, { payload }) => {
-      state.inLibrary = state.inLibrary.filter(
+      state.booksInLibrary = state.booksInLibrary.filter(
         (item) => item._id !== payload.id
       );
       state.error = "";
@@ -82,7 +82,7 @@ export const booksSlice = createSlice({
     builder.addCase(getUsersBooks.pending, isPending);
     builder.addCase(getUsersBooks.rejected, isRejected);
     builder.addCase(getUsersBooks.fulfilled, (state, { payload }) => {
-      state.inLibrary = payload;
+      state.booksInLibrary = payload;
       state.error = "";
       state.isLoading = false;
     });
@@ -127,11 +127,11 @@ export const booksSlice = createSlice({
     builder.addCase(addOwnBook.pending, isPending);
     builder.addCase(addOwnBook.rejected, isRejected);
     builder.addCase(addOwnBook.fulfilled, (state, { payload }) => {
-      state.inLibrary.push(payload);
+      state.booksInLibrary.push(payload);
       state.error = "";
       state.isLoading = false;
     });
   },
 });
-
+export const { resetBooksInLibrary } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;

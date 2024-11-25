@@ -14,9 +14,9 @@ const ReadingDashboard: FC = () => {
   return (
     <div className="flex flex-col tablet:flex-row tablet:gap-10 desktop:flex-col bg-gray-bg-color w-full rounded-lg p-5 tablet:p-8 desktop:p-5 desktop:pt-10 desktop:w-[353px]">
       <div className="shrink-0">
-        <span className="text-tiny text-primary-white mb-5 ml-3.5 tablet:text-small">
+        <p className="text-tiny text-primary-white mb-3 ml-3.5 tablet:text-small">
           {status === CurrentStatus.ACTIVE ? t("Stop page") : t("Start page")}
-        </span>
+        </p>
         <ReadingForm />
       </div>
       {status ? (

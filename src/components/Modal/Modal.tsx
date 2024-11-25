@@ -1,6 +1,11 @@
 import { FC, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { ModalProps } from "./types";
+import { ReactNode } from "react";
+
+export type ModalProps = {
+  onClose: () => void;
+  children: ReactNode;
+};
 
 const rootModal = document.querySelector("#modal-root");
 
@@ -13,9 +18,7 @@ const Modal: FC<ModalProps> = ({ onClose, children }) => {
         return;
       }
 
-      setTimeout(() => {
-        onClose();
-      }, 300);
+      onClose();
     };
 
     document.addEventListener("keydown", closeModalByEsc);
@@ -30,9 +33,8 @@ const Modal: FC<ModalProps> = ({ onClose, children }) => {
     if (e.target !== e.currentTarget) {
       return;
     }
-    setTimeout(() => {
-      onClose();
-    }, 300);
+
+    onClose();
   };
 
   return createPortal(

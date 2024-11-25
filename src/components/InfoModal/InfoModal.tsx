@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { BookProps } from "../../pages/HomePage/BooksItem/types";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
@@ -9,6 +8,7 @@ import {
 } from "../../redux/books/booksOperations";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { BookProps } from "../../pages/HomePage/BooksItem/BooksItem";
 
 const InfoModal: FC<BookProps> = ({ result, isInLibrary, pageName }) => {
   const { t } = useTranslation();

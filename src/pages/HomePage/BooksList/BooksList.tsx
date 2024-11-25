@@ -1,6 +1,11 @@
 import { FC } from "react";
 import BooksItem from "../BooksItem/BooksItem";
-import { BooksListProps } from "./types";
+import { IBook, IBookLibrary } from "../../../redux/books/types";
+
+export type BooksListProps = {
+  results: IBook[] | IBookLibrary[];
+  pageName?: "home" | "library" | "reading" | undefined;
+};
 
 const BooksList: FC<BooksListProps> = ({ results, pageName }) => {
   return (

@@ -1,28 +1,43 @@
 import { FC } from "react";
-import Input from "../FilterInput/FilterInput";
-import { DashBoardProps } from "./types";
+import FilterInput from "../FilterInput/FilterInput";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const Dashboard: FC<DashBoardProps> = ({ setTitle, setAuthor, setPage }) => {
+export type DashBoardProps = {
+  setAuthor: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  title?: string;
+  author?: string;
+};
+
+const Dashboard: FC<DashBoardProps> = ({
+  setTitle,
+  setAuthor,
+  setPage,
+  title,
+  author,
+}) => {
   const { t } = useTranslation();
 
   return (
     <div className="bg-gray-bg-color w-full rounded-lg p-5 tablet:p-8 desktop:p-5 desktop:pt-10 desktop:w-[353px]">
-      <span className="text-tiny text-primary-white mb-5 ml-3.5 tablet:text-small">
+      <p className="text-tiny text-primary-white mb-3 ml-3.5 tablet:text-small">
         {t("filters")}
-      </span>
+      </p>
       <div className="flex flex-col gap-3 tablet:gap-3.5 mb-5">
-        <Input
+        <FilterInput
           placeholder={t("Enter text")}
           text={t("Book title:")}
           setOption={setTitle}
+          option={title}
           setPage={setPage}
         />
-        <Input
+        <FilterInput
           placeholder={t("Enter text")}
           text={t("Book author:")}
           setOption={setAuthor}
+          option={author}
           setPage={setPage}
         />
       </div>

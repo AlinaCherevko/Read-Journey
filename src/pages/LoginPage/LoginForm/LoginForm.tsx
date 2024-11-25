@@ -12,14 +12,21 @@ import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useSchemaLog } from "../../../hooks/schemas";
+//import { resetBooksInLibrary } from "../../../redux/books/booksSlice";
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
   const schemaLog = useSchemaLog();
+  //const isAuth = useSelector(selectIsAuth);
 
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const error = useSelector(selectError);
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  //   !isAuth && dispatch(resetBooksInLibrary());
+  // }, [dispatch, isAuth]);
 
   useEffect(() => {
     if (error && !isFirstRender) {

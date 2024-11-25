@@ -1,3 +1,5 @@
+import { IBookLibrary } from "../books/types";
+
 export interface IState {
   user: IUser;
   token: string | null;
@@ -7,6 +9,7 @@ export interface IState {
   isRefreshingToken: boolean;
   isAuthLoading: boolean;
   error: string | null | unknown;
+  // booksInLibrary: IBookLibrary[];
 }
 
 export interface IInitialData {
@@ -29,6 +32,7 @@ export interface ISignUpData extends IInitialData {
 export interface ISignUpRes extends IInitialData {
   token: string;
   refreshToken: string;
+  booksInLibrary: IBookLibrary[];
 }
 
 export interface ILoginData {

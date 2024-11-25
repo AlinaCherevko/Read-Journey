@@ -1,28 +1,25 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 
 export type InputFilterProps = {
   placeholder: string;
   text: string;
+  option?: string;
   setOption?: React.Dispatch<React.SetStateAction<string>>;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Input: FC<InputFilterProps> = ({
+const FilterInput: FC<InputFilterProps> = ({
   placeholder,
   text,
   setOption,
   setPage,
+  option,
 }) => {
-  const [value, setValue] = useState<string>("");
-
-  useEffect(() => {
-    if (setOption) setOption(value);
-  }, [value]);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("");
-    setValue(e.target.value.trim());
-    if (setPage) setPage(1);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    setOption && setOption(e.target.value.trim());
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    setPage && setPage(1);
   };
 
   return (
@@ -32,9 +29,10 @@ const Input: FC<InputFilterProps> = ({
         onChange={handleInputChange}
         className="bg-transparent outline-none text-lightSmall tablet:text-small text-primary-white placeholder:text-primary-white"
         placeholder={placeholder}
+        value={option}
       ></input>
     </div>
   );
 };
 
-export default Input;
+export default FilterInput;

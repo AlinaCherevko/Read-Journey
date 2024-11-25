@@ -1,6 +1,13 @@
 import type { FC } from "react";
 import sprite from "/symbol-defs.svg";
-import { IconProps } from "./types";
+
+export type IconProps = {
+  id: string;
+  fill?: string;
+  stroke?: string;
+  width?: number | string;
+  height?: number | string;
+};
 
 const Icon: FC<IconProps> = ({ id, fill, stroke, width, height }) => {
   return (

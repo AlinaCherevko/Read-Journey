@@ -4,9 +4,21 @@ import LoginForm from "./LoginForm/LoginForm";
 import BgImage from "./BgImage/BgImage";
 import LangSwitcher from "../../components/LangSwitcher/LangSwitcher";
 import { useTranslation } from "react-i18next";
+//import { AppDispatch } from "../../redux/store";
+//import { useDispatch, useSelector } from "react-redux";
+//import { selectIsAuth } from "../../redux/auth/authSelectors";
+//import { resetBooksInLibrary } from "../../redux/books/booksSlice";
 
 const LoginPage: FC = () => {
+  //const isAuth = useSelector(selectIsAuth);
+  //const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // !isAuth && dispatch(resetBooksInLibrary());
+  // }, [dispatch, isAuth]);
+
   return (
     <section>
       <div className="wrapper">

@@ -1,5 +1,4 @@
 import { FC, useState, memo } from "react";
-import { BookProps } from "./types";
 import Modal from "../../../components/Modal/Modal";
 import InfoModal from "../../../components/InfoModal/InfoModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +6,20 @@ import { selectLibrariesBooks } from "../../../redux/books/booksSelectors";
 import Icon from "../../../components/Icon/Icon";
 import { AppDispatch } from "../../../redux/store";
 import { deleteFromLibrary } from "../../../redux/books/booksOperations";
-import { IBookLibrary } from "../../../redux/books/types";
+import { IBook, IBookLibrary } from "../../../redux/books/types";
+
+export type BookProps = {
+  result: IBook | IBookLibrary;
+  pageName?: "home" | "library" | "reading";
+  isInLibrary?: boolean;
+};
 
 const BooksItem: FC<BookProps> = ({ result, pageName }) => {
   const [isInfoModalVisible, setIsInfoModalVisible] = useState<boolean>(false);
-  const inLibrary = useSelector(selectLibrariesBooks);
+  const booksInLibrary = useSelector(selectLibrariesBooks);
   const dispatch: AppDispatch = useDispatch();
 
-  const isInLibrary = inLibrary.some(
+  const isInLibrary = booksInLibrary.some(
     (book: IBookLibrary) => book.title === result.title
   );
 

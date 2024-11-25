@@ -7,3 +7,8 @@ export const selectToken = (state: RootState) => state.auth.token;
 export const selectRefreshing = (state: RootState) => state.auth.isRefreshing;
 export const selectIsRefreshingToken = (state: RootState) =>
   state.auth.isRefreshingToken;
+export const selectIsAuthLoading = (state: RootState) =>
+  state.auth.isAuthLoading;
+
+// export const selectBooksInLibraryAuth = (state: RootState) =>
+// state.auth.booksInLibrary;

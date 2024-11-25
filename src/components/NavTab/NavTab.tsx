@@ -1,6 +1,10 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { NavLinkProps } from "./types";
+
+type NavLinkProps = {
+  to: string;
+  text: string;
+};
 
 const NavTab: FC<NavLinkProps> = ({ to, text }) => {
   return (

@@ -1,6 +1,6 @@
 export interface IBooksState {
   recommended: IRecommendedBooks;
-  inLibrary: IBookLibrary[];
+  booksInLibrary: IBookLibrary[];
   currentBook: IBookLibrary | null;
   error: string | undefined;
   isLoading: boolean;

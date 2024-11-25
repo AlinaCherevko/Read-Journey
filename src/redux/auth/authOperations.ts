@@ -39,8 +39,8 @@ export const logIn = createAsyncThunk<
 >("auth/signin", async (credentials, thunkAPI) => {
   try {
     const { data } = await instance.post("/users/signin", credentials);
-
     return data;
+    // return { ...data, booksInLibrary: store.getState().books.booksInLibrary };
   } catch (error: unknown) {
     if (error instanceof AxiosError && error.response) {
       const errorMessage = error.response.data.message;
