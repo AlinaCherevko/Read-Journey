@@ -30,12 +30,10 @@ const BooksItem: FC<BookProps> = ({ result, pageName }) => {
 
   return (
     <>
-      <div
-        className="w-full tablet:w-[137px] h-auto"
-        onClick={() => setIsInfoModalVisible(true)}
-      >
+      <div className="w-full tablet:w-[137px] h-auto">
         <img
-          className="w-full tablet:w-[137px] h-[208px] mb-2 rounded-sm"
+          className="w-full tablet:w-[137px] h-[208px] mb-2 rounded-sm cursor-pointer"
+          onClick={() => setIsInfoModalVisible(true)}
           src={
             result.imageUrl
               ? result.imageUrl

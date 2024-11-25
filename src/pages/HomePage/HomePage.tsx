@@ -1,27 +1,33 @@
 import { FC, useState, useEffect, useRef } from "react";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import { AppDispatch } from "../../redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BooksSection from "./RecommendedBooks/RecommendedBooks";
 import { useTranslation } from "react-i18next";
 
 import { getRecommendedBooks } from "../../redux/books/booksOperations";
+import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
 
 const HomePage: FC = () => {
+  const { results } = useSelector(selectRecommendedBooks);
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const pageName = "home";
   const dispatch: AppDispatch = useDispatch();
+  console.log(results);
 
   const { t } = useTranslation();
 
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
+    if (isFirstRender.current && results.length !== 0) {
       isFirstRender.current = false;
       return;
+    }
+    if (results.length === 0) {
+      dispatch(getRecommendedBooks({ page }));
     }
 
     const searchOptions = {
@@ -29,8 +35,12 @@ const HomePage: FC = () => {
       author: author || "",
     };
 
-    dispatch(getRecommendedBooks({ page, ...searchOptions }));
-  }, [dispatch, page, title, author]);
+    const timeOutId = setTimeout(() => {
+      dispatch(getRecommendedBooks({ page, ...searchOptions }));
+    }, 350);
+
+    return () => clearTimeout(timeOutId);
+  }, [dispatch, page, title, author, results.length]);
 
   return (
     <section className="pt-3 desktop:pt-4 pb-5">
