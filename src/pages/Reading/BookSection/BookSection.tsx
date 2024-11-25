@@ -12,11 +12,11 @@ const BookSection: FC = () => {
 
   return (
     <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:min-h-[660px] desktop:pb-7">
-      <div className="">
-        <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
-          {t("reading")}
-        </h1>
-        {currentBook && (
+      <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
+        {t("reading")}
+      </h1>
+      <div className="flex items-center justify-center h-full w-full">
+        {currentBook ? (
           <div className="mt-10 tablet:mt-8 text-center desktop:mt-11">
             <img
               className="w-[137px] h-[208px] mb-4 mx-auto rounded-sm tablet:w-[169px] tablet:h-[256px] desktop:w-[224px] desktop:h-[340px]"
@@ -47,6 +47,13 @@ const BookSection: FC = () => {
                 alt="button-read"
               />
             </button>
+          </div>
+        ) : (
+          <div className="flex flex-col justify-center p-10 desktop:p-0 items-center text-center">
+            <img src="/book-lg.png" alt="book-q" />
+            <p className="text-mediumSmall text-primary-white font-bold mt-4">
+              Add your first book to start reading
+            </p>
           </div>
         )}
       </div>

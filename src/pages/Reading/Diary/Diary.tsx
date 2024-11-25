@@ -8,8 +8,8 @@ const Diary: FC = () => {
   const currentBook = useSelector(selectCurrentBook);
 
   return (
-    <div className="">
-      <ul className="p-4 bg-light-bg-color rounded-md flex flex-col gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto scrollbar-thin scrollbar-webkit ">
+    <div className="p-4 bg-light-bg-color rounded-md desktop:h-[370px] overflow-auto scrollbar-thin scrollbar-webkit">
+      <ul className=" flex flex-col gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto">
         {currentBook?.progress &&
           currentBook.progress.map((item: IProgress) => (
             <ReadingInfo key={item._id} item={item} />

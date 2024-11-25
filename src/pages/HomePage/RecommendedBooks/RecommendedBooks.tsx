@@ -48,7 +48,7 @@ const BooksSection: FC<RecBooksProps> = ({
   }, [value, booksInLibrary]);
 
   return (
-    <div className="bg-gray-bg-color rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:h-[660px] overflow-auto desktop:pb-7 scrollbar-thin scrollbar-webkit">
+    <div className="bg-gray-bg-color rounded-lg tablet:rounded-lg px-5 py-10 tablet:px-10 shrink-0 desktop:w-[847px] desktop:h-[660px] overflow-auto desktop:pb-7 scrollbar-thin scrollbar-webkit">
       <div className="flex mb-8 justify-between items-center">
         <h1 className="text-primary-white text-big font-bold  tablet:text-lightLarge">
           {title}
