@@ -9,6 +9,7 @@ type PaginationProps = {
 
 const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   const { totalPages } = useSelector(selectRecommendedBooks);
+  console.log(totalPages);
 
   const handleNextBtnClick = () => {
     if (page === totalPages) {
@@ -28,22 +29,22 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   return (
     <div className="flex gap-2">
       <button
-        disabled={page === 1}
+        disabled={page === 1 || totalPages === 1}
         onClick={handlePrevBtnClick}
-        className={`w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white hover:border-primary-white ${
+        className={`w-10 h-10 rounded-full border text-primary-white border-primary-white ${
           page === 1
-            ? "hover:border-main-border-color hover:text-main-text-color cursor-default"
+            ? "border-main-text-color text-main-text-color cursor-default"
             : ""
         }`}
       >
         <span>&lt;</span>
       </button>
       <button
-        disabled={page === totalPages}
+        disabled={page === totalPages || totalPages === 1}
         onClick={handleNextBtnClick}
-        className={`w-10 h-10 rounded-full border border-main-border-color hover:text-primary-white hover:border-primary-white ${
+        className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
           page === totalPages
-            ? "hover:border-main-border-color hover:text-main-text-color cursor-default"
+            ? "border-main-text-color text-main-text-color cursor-default"
             : ""
         }`}
       >
