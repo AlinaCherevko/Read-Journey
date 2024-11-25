@@ -9,6 +9,7 @@ type PaginationProps = {
 
 const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   const { totalPages } = useSelector(selectRecommendedBooks);
+
   const isNextPageDisabled =
     page === totalPages || totalPages === 1 || !totalPages;
 
@@ -34,9 +35,10 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
       <button
         disabled={isPreviousPageDisabled}
         onClick={handlePrevBtnClick}
-        className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
-          isPreviousPageDisabled &&
-          "border-main-text-color text-main-text-color cursor-default"
+        className={`w-10 h-10 rounded-full${
+          isPreviousPageDisabled
+            ? " border border-main-text-color text-main-text-color cursor-default"
+            : " text-primary-white border border-primary-white"
         }`}
       >
         <span>&lt;</span>
@@ -44,9 +46,10 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
       <button
         disabled={isNextPageDisabled}
         onClick={handleNextBtnClick}
-        className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
-          isNextPageDisabled &&
-          "border-main-text-color text-main-text-color cursor-default"
+        className={`w-10 h-10 rounded-full${
+          isNextPageDisabled
+            ? " border border-main-text-color text-main-text-color cursor-default"
+            : " text-primary-white border border-primary-white"
         }`}
       >
         <span>&gt;</span>
