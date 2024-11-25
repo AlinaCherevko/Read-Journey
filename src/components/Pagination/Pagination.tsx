@@ -29,10 +29,9 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   return (
     <div className="flex gap-2">
       <button
-        disabled={page === 1 || totalPages === 1 || !totalPages}
         onClick={handlePrevBtnClick}
         className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
-          page === 1
+          page === 1 || totalPages === 1 || !totalPages
             ? "border-main-text-color text-main-text-color cursor-default"
             : ""
         }`}
@@ -40,7 +39,6 @@ const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
         <span>&lt;</span>
       </button>
       <button
-        disabled={page === totalPages || totalPages === 1 || !totalPages}
         onClick={handleNextBtnClick}
         className={`w-10 h-10 rounded-full text-primary-white border border-primary-white ${
           page === totalPages || totalPages === 1 || !totalPages
