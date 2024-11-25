@@ -38,8 +38,7 @@ const UserMenu: FC = () => {
             {user.name}
           </span>
         </div>
-
-        {user && <BurgerBtn onOpen={onOpen} />}
+        <BurgerBtn onOpen={onOpen} />
         <div className="hidden tablet:flex">
           <Button type="button" text={t("Log out")} onClick={handleLogout} />
         </div>

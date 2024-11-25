@@ -9,7 +9,7 @@ export type ButtonProps = {
 const Button: FC<ButtonProps> = ({ text, type, onClick }) => {
   return (
     <button
-      className="button text-primary-white text-medium bg-transparent rounded-lg border border-main-border-color px-7 py-3 hover:bg-primary-white hover:text-primary-black"
+      className=" min-w-[120px] text-primary-white text-medium bg-transparent rounded-lg border border-main-border-color px-7 py-3 hover:bg-primary-white hover:text-primary-black"
       type={type}
       onClick={onClick}
     >

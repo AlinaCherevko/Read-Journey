@@ -32,7 +32,7 @@ const Statistic: FC = () => {
         {progress && percentOfReading > 0 ? (
           <CircleCharts percentage={percentOfReading} />
         ) : (
-          <img src="/books-lg.png" alt="book-q" />
+          <img src="/book-lg.png" alt="book-q" />
         )}
         {maxPages > 0 && (
           <p className="flex text-tiny mx-auto">
