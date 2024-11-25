@@ -10,12 +10,14 @@ import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
 
 const HomePage: FC = () => {
   const { results } = useSelector(selectRecommendedBooks);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => {
+    const res = localStorage.getItem("page");
+    return res ? +res : 1;
+  });
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const pageName = "home";
   const dispatch: AppDispatch = useDispatch();
-  console.log(results);
 
   const { t } = useTranslation();
 

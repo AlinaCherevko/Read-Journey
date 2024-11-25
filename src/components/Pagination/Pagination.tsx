@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectRecommendedBooks } from "../../redux/books/booksSelectors";
 
@@ -9,6 +9,10 @@ type PaginationProps = {
 
 const Pagination: FC<PaginationProps> = ({ setPage, page }) => {
   const { totalPages } = useSelector(selectRecommendedBooks);
+
+  useEffect(() => {
+    localStorage.setItem("page", JSON.stringify(page));
+  }, [page]);
 
   const isNextPageDisabled =
     page === totalPages || totalPages === 1 || !totalPages;
