@@ -7,21 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsersBooks } from "../../redux/books/booksOperations";
 import { selectLibrariesBooks } from "../../redux/books/booksSelectors";
 
-// import { selectIsAuth } from "../../redux/auth/authSelectors";
-// import { selectLibrariesBooks } from "../../redux/books/booksSelectors";
-//import { getUsersBooks } from "../../redux/books/booksOperations";
-
 const Library: FC = () => {
   const pageName = "library";
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const booksInLibrary = useSelector(selectLibrariesBooks);
-  // const isAuth = useSelector(selectIsAuth);
+
   const hasFetchedBooks = useRef(false);
 
-  // useEffect(() => {
-  //   dispatch(getUsersBooks());
-  // }, [dispatch]);
   useEffect(() => {
     if (!hasFetchedBooks.current && booksInLibrary.length === 0) {
       dispatch(getUsersBooks());

@@ -9,7 +9,7 @@ const Diary: FC = () => {
 
   return (
     <div className="">
-      <ul className="p-4 bg-light-bg-color rounded-md flex flex-col gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto">
+      <ul className="p-4 bg-light-bg-color rounded-md flex flex-col gap-3.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto scrollbar-thin scrollbar-webkit ">
         {currentBook?.progress &&
           currentBook.progress.map((item: IProgress) => (
             <ReadingInfo key={item._id} item={item} />

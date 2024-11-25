@@ -23,7 +23,7 @@ const FilterInput: FC<InputFilterProps> = ({
   };
 
   return (
-    <div className="bg-light-bg-color px-3.5 py-3.5 rounded-md">
+    <div className="flex items-center bg-light-bg-color px-3.5 py-3.5 rounded-md h-[44px] tablet:h-[50px]">
       <span className="text-lightSmall mr-2.5 tablet:text-small">{text}</span>
       <input
         onChange={handleInputChange}

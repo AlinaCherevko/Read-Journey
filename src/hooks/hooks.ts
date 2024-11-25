@@ -18,7 +18,7 @@ export const useSelectStyles = (): StylesConfig => {
       border: "1px solid rgba(249, 249, 249, 0.2)",
 
       width: isMobile ? "120px" : "153px",
-      height: isMobile ? "40px" : "46px",
+      height: isMobile ? "40px" : "40px",
       boxShadow: "none",
       borderRadius: "12px",
       "&:hover": {

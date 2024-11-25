@@ -29,8 +29,10 @@ const Statistic: FC = () => {
         {t("Statistics_message")}
       </p>
       <div className=" bg-light-bg-color rounded-md flex flex-col justify-center items-center gap-0.5 h-[211px] tablet:h-[252px] tablet:w-[321px] desktop:w-auto overflow-auto">
-        {progress && percentOfReading > 0 && (
+        {progress && percentOfReading > 0 ? (
           <CircleCharts percentage={percentOfReading} />
+        ) : (
+          <img src="/books-lg.png" alt="book-q" />
         )}
         {maxPages > 0 && (
           <p className="flex text-tiny mx-auto">

@@ -12,21 +12,14 @@ import { selectError } from "../../../redux/auth/authSelectors";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useSchemaLog } from "../../../hooks/schemas";
-//import { resetBooksInLibrary } from "../../../redux/books/booksSlice";
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
   const schemaLog = useSchemaLog();
-  //const isAuth = useSelector(selectIsAuth);
 
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const error = useSelector(selectError);
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  //   !isAuth && dispatch(resetBooksInLibrary());
-  // }, [dispatch, isAuth]);
 
   useEffect(() => {
     if (error && !isFirstRender) {
@@ -56,7 +49,7 @@ const LoginForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-3 tablet:gap-4 mb-18 tablet:mb-36.5">
+      <div className="flex flex-col gap-4 tablet:gap-5 mb-18 tablet:mb-36.5">
         <FormInput
           success={isEmailValid}
           error={errors.email}
@@ -64,7 +57,7 @@ const LoginForm: FC = () => {
           label="email"
           text={t("Mail")}
           register={register}
-          type={t("email")}
+          describe={t("email")}
         />
         <FormInput
           success={isPasswordValid}
@@ -73,7 +66,8 @@ const LoginForm: FC = () => {
           label="password"
           text={t("Password")}
           register={register}
-          type={t("password")}
+          describe={t("password")}
+          type="password"
         />
       </div>
       <div className="flex items-center gap-3.5 tablet:gap-5">

@@ -7,16 +7,11 @@ export type Option = { value: string; label: string };
 
 export type ISelect = {
   onChange: (value: string) => void;
+  options: Option[];
 };
 
-const SelectEl: FC<ISelect> = ({ onChange }) => {
+const SelectEl: FC<ISelect> = ({ onChange, options }) => {
   const { t } = useTranslation();
-  const options = [
-    { value: "all", label: t("Show all") },
-    { value: "unread", label: t("Unread") },
-    { value: "in-progress", label: t("Inprogress") },
-    { value: "done", label: t("Done") },
-  ];
 
   const onSelectChange = (newValue: unknown) => {
     if (newValue && typeof newValue === "object" && "value" in newValue) {

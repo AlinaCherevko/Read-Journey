@@ -59,7 +59,6 @@ export const authSlice = createSlice({
     builder.addCase(logIn.rejected, handleAuthRejected);
     builder.addCase(logIn.fulfilled, (state, { payload }) => {
       state.user.name = payload.name;
-      // state.booksInLibrary = payload.booksInLibrary;
       state.user.email = payload.email;
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
@@ -77,8 +76,6 @@ export const authSlice = createSlice({
       state.isLoggedIn = initialState.isLoggedIn;
       state.isAuthLoading = initialState.isAuthLoading;
       state.error = initialState.error;
-      // state.booksInLibrary = initialState.booksInLibrary;
-      // persistor.purge();
     });
     //current
     builder.addCase(getCurrentUser.pending, (state) => {

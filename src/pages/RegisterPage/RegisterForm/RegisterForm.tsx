@@ -50,7 +50,7 @@ const RegisterForm: FC = () => {
   const isPasswordValid = !errors.password && getValues("password");
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-3 tablet:gap-4 mb-5 tablet:mb-20">
+      <div className="flex flex-col gap-4 tablet:gap-5 mb-5 tablet:mb-20">
         <FormInput
           success={isNameValid}
           error={errors.name}
@@ -58,7 +58,7 @@ const RegisterForm: FC = () => {
           label="name"
           text={t("Name")}
           register={register}
-          type={t("name")}
+          describe={t("name")}
         />
         <FormInput
           success={isEmailValid}
@@ -67,7 +67,7 @@ const RegisterForm: FC = () => {
           label="email"
           text={t("Mail")}
           register={register}
-          type={t("email")}
+          describe={t("email")}
         />
         <FormInput
           success={isPasswordValid}
@@ -76,7 +76,8 @@ const RegisterForm: FC = () => {
           label="password"
           text={t("Password")}
           register={register}
-          type={t("password")}
+          describe={t("password")}
+          type="password"
         />
       </div>
       <div className="flex items-center gap-3.5 tablet:gap-5">

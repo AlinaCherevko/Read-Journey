@@ -48,7 +48,9 @@ const BooksItem: FC<BookProps> = ({ result, pageName }) => {
             <h3 className="text-small text-primary-white font-bold mb-0.5 whitespace-nowrap overflow-hidden overflow-ellipsis">
               {result.title}
             </h3>
-            <p className="text-tiny">{result.author}</p>
+            <p className="text-tiny whitespace-nowrap overflow-hidden overflow-ellipsis">
+              {result.author}
+            </p>
           </div>
           {isInLibrary && pageName === "library" && (
             <div

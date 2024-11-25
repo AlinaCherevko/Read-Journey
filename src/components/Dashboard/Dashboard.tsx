@@ -25,7 +25,7 @@ const Dashboard: FC<DashBoardProps> = ({
       <p className="text-tiny text-primary-white mb-3 ml-3.5 tablet:text-small">
         {t("filters")}
       </p>
-      <div className="flex flex-col gap-3 tablet:gap-3.5 mb-5">
+      <div className="flex flex-col gap-4 tablet:gap-5 mb-5">
         <FilterInput
           placeholder={t("Enter text")}
           text={t("Book title:")}

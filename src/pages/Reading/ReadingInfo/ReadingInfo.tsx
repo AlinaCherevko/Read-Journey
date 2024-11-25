@@ -19,10 +19,9 @@ const ReadingInfo: FC<InfoProps> = ({ item }) => {
   const startReadingData = new Date(item.startReading);
   const endReadingData = new Date(item.finishReading);
   const duration = endReadingData.getTime() - startReadingData.getTime();
-  console.log(currentBook);
+
   const handleDeleteReadingSession = () => {
     if (currentBook) {
-      console.log(currentBook._id);
       dispatch(deleteSession({ bookId: currentBook._id, readingId: item._id }));
     }
   };

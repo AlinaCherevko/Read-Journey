@@ -1,18 +1,10 @@
 import { FC, useState, useEffect, useRef } from "react";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import { AppDispatch } from "../../redux/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import BooksSection from "./RecommendedBooks/RecommendedBooks";
 import { useTranslation } from "react-i18next";
-import // getRecommendedBooks,
-//getUsersBooks,
-"../../redux/books/booksOperations";
-import {
-  selectLibrariesBooks,
-  selectRecommendedBooks,
-  // selectRecommendedBooks,
-} from "../../redux/books/booksSelectors";
-import { selectIsAuth } from "../../redux/auth/authSelectors";
+
 import { getRecommendedBooks } from "../../redux/books/booksOperations";
 
 const HomePage: FC = () => {
@@ -21,15 +13,9 @@ const HomePage: FC = () => {
   const [author, setAuthor] = useState("");
   const pageName = "home";
   const dispatch: AppDispatch = useDispatch();
-  const booksInLibrary = useSelector(selectLibrariesBooks);
-  const isAuth = useSelector(selectIsAuth);
+
   const { t } = useTranslation();
-  // const hasFetchedBooks = useRef(false);
-  //console.log(hasFetchedBooks);
-  const recommendedBooks = useSelector(selectRecommendedBooks);
-  console.log(booksInLibrary);
-  console.log(isAuth);
-  console.log(recommendedBooks);
+
   const isFirstRender = useRef(true);
 
   useEffect(() => {

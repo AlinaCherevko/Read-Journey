@@ -12,7 +12,6 @@ import {
   addOwnBook,
 } from "./booksOperations";
 import { IBooksState } from "./types";
-//import { RootState, store } from "../store";
 
 const initialState: IBooksState = {
   recommended: {
