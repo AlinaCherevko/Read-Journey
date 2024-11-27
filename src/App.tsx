@@ -7,25 +7,17 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { getCurrentUser } from "./redux/auth/authOperations";
-import { selectIsAuth, selectRefreshing } from "./redux/auth/authSelectors";
+import { selectRefreshing } from "./redux/auth/authSelectors";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-// import { resetBooksInLibrary } from "./redux/books/booksSlice";
-// import HomePage from "./pages/HomePage/HomePage";
-//import Library from "./pages/Library/Library";
-//import Reading from "./pages/Reading/Reading";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const Library = lazy(() => import("./pages/Library/Library"));
 const Reading = lazy(() => import("./pages/Reading/Reading"));
-// const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
-// const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
   const isRefreshing = useSelector(selectRefreshing);
-  const isAuth = useSelector(selectIsAuth);
-  console.log(isAuth);
 
   useEffect(() => {
     dispatch(getCurrentUser());
