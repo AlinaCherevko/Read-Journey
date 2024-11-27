@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export type DashBoardProps = {
-  setAuthor: React.Dispatch<React.SetStateAction<string>>;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: (params: string) => void;
+  setAuthor: (params: string) => void;
+  // setAuthor: React.Dispatch<React.SetStateAction<string>>;
+  // setTitle: React.Dispatch<React.SetStateAction<string>>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   title?: string;
   author?: string;

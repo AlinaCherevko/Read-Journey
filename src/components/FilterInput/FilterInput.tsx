@@ -4,7 +4,7 @@ export type InputFilterProps = {
   placeholder: string;
   text: string;
   option?: string;
-  setOption?: React.Dispatch<React.SetStateAction<string>>;
+  setOption?: (params: string) => void;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
 };
 
