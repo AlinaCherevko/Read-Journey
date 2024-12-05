@@ -10,6 +10,7 @@ import { getCurrentUser } from "./redux/auth/authOperations";
 import { selectRefreshing } from "./redux/auth/authSelectors";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const Library = lazy(() => import("./pages/Library/Library"));
@@ -69,6 +70,7 @@ function App() {
           </RestrictedRoute>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

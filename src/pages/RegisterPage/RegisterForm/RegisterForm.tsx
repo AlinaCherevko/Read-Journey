@@ -83,7 +83,7 @@ const RegisterForm: FC = () => {
       <div className="flex items-center gap-3.5 tablet:gap-5">
         <Button text={t("Registrations")} type="submit" />
         <Link
-          to={"/login"}
+          to={"/"}
           className="text-lightSmall tablet:text-small underline cursor-pointer hover:text-primary-white"
         >
           {t("Already have an account")}

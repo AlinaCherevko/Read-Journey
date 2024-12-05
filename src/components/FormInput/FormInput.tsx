@@ -14,7 +14,7 @@ export type InputProps<T extends FieldValues> = {
   error: FieldError | undefined;
   success?: boolean | string | number;
   describe?: string;
-  type?: string; // Optional prop to set input type (e.g., 'email', 'password'). Default is 'text' if not provided.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.  // Your implementation here.
+  type?: string;
 };
 
 const FormInput = <T extends FieldValues>({
