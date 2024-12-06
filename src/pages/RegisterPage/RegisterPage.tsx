@@ -8,10 +8,10 @@ import { useTranslation } from "react-i18next";
 const RegisterPage: FC = () => {
   const { t } = useTranslation();
   return (
-    <section>
+    <section className="py-5 tablet:py-8">
       <div className="wrapper">
-        <div className="flex flex-col gap-2.5 desktop:flex-row desktop:gap-4 pb-5">
-          <div className="bg-gray-bg-color rounded-lg p-5 pb-10 tablet:pb-53.5 tablet:pt-10 tablet:pl-16 mt-5 tablet:pr-42 desktop:mt-8 desktop:pb-10 desktop:pr-16 desktop:h-[736px]">
+        <div className="flex flex-col gap-2.5 desktop:flex-row desktop:gap-4">
+          <div className="bg-gray-bg-color rounded-lg p-5 pb-10 tablet:pb-53.5 tablet:pt-10 tablet:pl-16 tablet:pr-42 desktop:pb-10 desktop:pr-16 desktop:h-[736px]">
             <div className="flex justify-between items-center">
               <Logo />
               <LangSwitcher />
